@@ -29,5 +29,15 @@ RSpec.describe '/admin', type: :feature do
         expect(current_path).to eq('/admin/invoices')
       end
     end
+
+    it 'Then I see the names of the top 5 customers with the largest number of successful transactions' do
+      expect(page).to have_content("Top Customers")
+
+      expect(page).to have_content("#{@cust_1.full_name} - #{@cust_1.success_count} purchases")
+      expect(page).to have_content("#{@cust_2.full_name} - #{@cust_2.success_count} purchases")
+      expect(page).to have_content("#{@cust_3.full_name} - #{@cust_3.success_count} purchases")
+      expect(page).to have_content("#{@cust_4.full_name} - #{@cust_4.success_count} purchases")
+      expect(page).to have_content("#{@cust_5.full_name} - #{@cust_5.success_count} purchases")
+    end
   end
 end
