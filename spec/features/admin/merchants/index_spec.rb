@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe '/admin/merchants', type: :feature do
   before(:each) do
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+    @merch_3 = create(:merchant)
+
     visit '/admin/merchants'
   end
 
