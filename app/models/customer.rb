@@ -3,8 +3,17 @@ class Customer < ApplicationRecord
   has_many :transactions, through: :invoices
   has_many :items, through: :invoices
 
+
+  def transaction_count(merchant)
+    items.where(merchant_id: merchant.id).count
+  end
+  
   def self.top_five_cust
-    joins(:transactions).select("customers.*, count(transactions.id) as transaction_count").where("result = 1").group(:id).order("transaction_count desc").limit(5)
+    joins(:transactions)
+    .select("customers.*, count(transactions.id) as transaction_count")
+    .where("result = 1").group(:id)
+    .order("transaction_count desc")
+    .limit(5)
   end
 
   def success_count
