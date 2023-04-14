@@ -7,3 +7,16 @@
 <div id="invoices">
   <%= link_to 'Invoices', '/admin/invoices', method: :get %>
 </div>
+
+<div id="top-cust"> 
+  <div>
+    <h3>Top Customers</h3>
+  </div>
+  <div>
+    <ol>
+      <% @top_cust.each do |cust| %>
+        <li><%= cust.full_name  %> - <%= cust.success_count %> purchases</li>
+      <% end %>
+    </ol>
+  </div>
+</div>
