@@ -1,0 +1,15 @@
+<h3>Admin Dashboard</h3>
+
+<div id="merchants">
+  <%= link_to 'Merchants', '/admin/merchants', method: :get %>
+</div>
+
+<div id="invoices">
+  <%= link_to 'Invoices', '/admin/invoices', method: :get %>
+</div>
+
+<div>
+  <% @merchants.each do |merchant|%>
+    <p><%=  merchant.name %></p>
+  <% end %>
+</div>
