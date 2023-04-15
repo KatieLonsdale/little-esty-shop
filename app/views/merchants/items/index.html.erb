@@ -1,0 +1,17 @@
+<h4><%= @merchant.name %></h4>
+
+<div id="my-items">
+  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+</div>
+
+<div id="my-invoices">
+  <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+</div>
+
+<div id="my-items-list">
+  <% @items.each do |item| %>
+   <div id="item-<%= item.id %>">
+   <li><%= "#{item.name}" %></li>
+   </div>
+  <% end %> 
+  
