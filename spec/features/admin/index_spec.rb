@@ -1,4 +1,7 @@
 require 'rails_helper'
+require './spec/testable.rb'
+
+include Testable
 
 RSpec.describe '/admin', type: :feature do
   before(:each) do
@@ -79,13 +82,4 @@ RSpec.describe '/admin', type: :feature do
       end
     end
   end
-end
-
-def delete_data
-  Transaction.delete_all
-  InvoiceItem.delete_all
-  Item.delete_all
-  Invoice.delete_all
-  Customer.delete_all
-  Merchant.delete_all
 end

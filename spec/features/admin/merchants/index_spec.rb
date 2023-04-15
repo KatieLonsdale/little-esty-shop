@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe '/admin/merchants', type: :feature do
   before(:each) do
+    delete_data
     @merch_1 = create(:merchant)
     @merch_2 = create(:merchant)
     @merch_3 = create(:merchant)
@@ -21,4 +22,13 @@ RSpec.describe '/admin/merchants', type: :feature do
       expect(current_path).to eq(admin_merchant_path(@merch_1))
     end
   end
+end
+
+def delete_data
+  Transaction.delete_all
+  InvoiceItem.delete_all
+  Item.delete_all
+  Invoice.delete_all
+  Merchant.delete_all
+  Customer.delete_all
 end
