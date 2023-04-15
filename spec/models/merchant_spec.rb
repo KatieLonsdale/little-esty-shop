@@ -1,4 +1,7 @@
 require 'rails_helper'
+require './spec/testable.rb'
+
+include Testable
 
 RSpec.describe Merchant do
   describe 'relationships' do
