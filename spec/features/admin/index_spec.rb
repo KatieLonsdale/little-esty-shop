@@ -1,4 +1,7 @@
 require 'rails_helper'
+require './spec/testable.rb'
+
+include Testable
 
 RSpec.describe '/admin', type: :feature do
   before(:each) do
@@ -91,14 +94,4 @@ RSpec.describe '/admin', type: :feature do
       expect(page).to have_content("#{@cust_5.full_name} - #{@cust_5.success_count} purchases")
     end
   end
-end
-
-
-def delete_data
-  Transaction.delete_all
-  InvoiceItem.delete_all
-  Item.delete_all
-  Invoice.delete_all
-  Merchant.delete_all
-  Customer.delete_all
 end
