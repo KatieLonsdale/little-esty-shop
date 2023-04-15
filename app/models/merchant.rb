@@ -14,6 +14,6 @@ class Merchant < ApplicationRecord
   end
 
   def items_ready
-    invoice_items.where.not(status: 2).distinct.order(created_at: :desc)
+    invoice_items.where.not(status: 2).distinct.order(:invoice_id, :id)
   end
 end
