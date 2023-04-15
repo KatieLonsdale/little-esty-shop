@@ -12,4 +12,8 @@ class Merchant < ApplicationRecord
              .group("customers.id")
              .order("transaction_count desc").limit(5)
   end
+
+  def items_ready
+    invoice_items.where.not(status: 2)
+  end
 end

@@ -8,11 +8,24 @@
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </div>
 
-<ol>
 <div id="favorite-customers">
+  <ol>
+  <h5>Favorite Customers</h5>
   <% @merchant.favorite_customers.each do |customer| %>
    <div id="customer-<%= customer.id %>">
    <li><%= "#{customer.full_name} - #{customer.transaction_count(@merchant)} purchases" %></li>
    </div>
   <% end %> 
   </ol>
+</div>
+
+<div id="ready-to-ship">
+  <ul>
+  <h5>Items Ready to Ship</h5>
+  <% @merchant.items_ready.each do |invoice_item| %>
+    <div id="invoice-item-<%= invoice_item.id %>">
+      <li><%= "#{invoice_item.item_name} - Invoice " %><%= link_to "##{invoice_item.invoice_id}", "/merchants/#{@merchant.id}/invoices/#{invoice_item.invoice_id}" %></li>
+    </div>
+  <% end %>
+  </ul>
+</div>
