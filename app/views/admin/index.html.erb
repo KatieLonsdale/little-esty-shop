@@ -8,6 +8,17 @@
   <%= link_to 'Invoices', '/admin/invoices', method: :get %>
 </div>
 
+<div id="incomplete-invoices"> 
+  <div>
+    <h3>Incomplete Invoices</h3>
+  </div>
+  <div>
+      <% @incomplete_invoices.each do |invoice| %>
+        <p>Invoice #<%= invoice.id %></p>
+      <% end %>
+  </div>
+</div>
+
 <div id="top-cust"> 
   <div>
     <h3>Top Customers</h3>
