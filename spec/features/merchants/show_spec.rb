@@ -147,12 +147,13 @@ RSpec.describe 'merchant show page' do
       end
 
     end
-    xit 'is ordered from oldest to newest' do
+    it 'is ordered from oldest to newest' do
+      us_5_test_data
 
+      visit "/merchants/#{@merch_1.id}/dashboard"
+
+      expect("#{@invoice_3.id}").to appear_before("#{@invoice_1.id}")
+      expect("#{@invoice_1.id}").to appear_before("#{@invoice_2.id}")
     end
   end
 end
-
-
-# And I see the date formatted like "Monday, July 18, 2019"
-# And I see that the list is ordered from oldest to newest
