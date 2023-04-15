@@ -6,8 +6,7 @@ require 'rails_helper'
 RSpec.describe 'merchant items index page' do
   describe 'when I visit my my items index page' do
     before(:all) do
-      Item.delete_all
-      Merchant.delete_all
+      delete_data
       @merch_1 = create(:merchant)
       @merch_2 = create(:merchant)
       create_list(:item, 10, merchant_id: @merch_1.id)
@@ -37,4 +36,13 @@ RSpec.describe 'merchant items index page' do
       end
     end
   end
+end
+
+def delete_data
+  Transaction.delete_all
+  InvoiceItem.delete_all
+  Item.delete_all
+  Invoice.delete_all
+  Merchant.delete_all
+  Customer.delete_all
 end
