@@ -26,7 +26,7 @@ RSpec.describe Merchant do
         us_4_test_data
       end
       it 'returns an array of invoice_items that are not shipped' do
-        expect(@merch_1.items_ready).to eq ([@pending_item_1, @pending_item_2, @packaged_item_1, @packaged_item_2].flatten)
+        expect(@merch_1.items_ready.sort).to eq ([@pending_item_1, @pending_item_2, @packaged_item_1, @packaged_item_2].flatten)
       end
     end
   end
