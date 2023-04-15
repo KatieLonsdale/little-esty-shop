@@ -106,3 +106,67 @@ RSpec.describe Customer do
     end
   end
 end
+
+def us_3_test_data
+  Merchant.destroy_all
+  Customer.destroy_all
+  @merch_1 = create(:merchant)
+  @merch_2 = create(:merchant)
+
+  @cust_1 = create(:customer)
+  @cust_2 = create(:customer)
+  @cust_3 = create(:customer)
+  @cust_4 = create(:customer)
+  @cust_5 = create(:customer)
+  @cust_6 = create(:customer)
+  @cust_7 = create(:customer)
+
+  @item_1 = create(:item, merchant: @merch_1)
+  @item_2 = create(:item, merchant: @merch_2)
+
+  # customer 6 - 6 succ transactions
+  # switching cust 6 and 1 to make sure method is able to order on its own
+  6.times do
+    invoice = create(:invoice, status: 1, customer: @cust_6)
+    create(:invoice_item, invoice: invoice, item: @item_1)
+    create(:transaction, result: 1, invoice: invoice)
+  end
+
+  invoice = create(:invoice, status: 1, customer: @cust_6)
+    create(:invoice_item, invoice: invoice, item: @item_2)
+    create(:transaction, result: 1, invoice: invoice)
+
+  # customer 2 - 5 succ transactions
+  5.times do
+    invoice = create(:invoice, status: 1, customer: @cust_2)
+    create(:invoice_item, invoice: invoice, item: @item_1)
+    create(:transaction, result: 1, invoice: invoice)
+  end
+
+  # customer 3 - 4 succ transactions
+  4.times do
+    invoice = create(:invoice, status: 1, customer: @cust_3)
+    create(:invoice_item, invoice: invoice, item: @item_1)
+    create(:transaction, result: 1, invoice: invoice)
+  end
+
+  # customer 4 - 3 succ transactions
+  3.times do
+    invoice = create(:invoice, status: 1, customer: @cust_4)
+    create(:invoice_item, invoice: invoice, item: @item_1)
+    create(:transaction, result: 1, invoice: invoice)
+  end
+  
+  # customer 5 - 2 success 2 failures
+  2.times do 
+    invoice = create(:invoice, status: 1, customer: @cust_5)
+    create(:invoice_item, invoice: invoice, item: @item_1)
+    create(:transaction, result: 0, invoice: invoice)
+    create(:transaction, result: 1, invoice: invoice)
+  end
+
+  # customer 1 - one succ transaction
+  invoice = create(:invoice, status: 1, customer: @cust_1)
+  create(:invoice_item, invoice: invoice, item: @item_1)
+  create(:transaction, result: 1, invoice: invoice)
+end
