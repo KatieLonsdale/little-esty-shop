@@ -113,9 +113,9 @@ module Testable
     @item_2 = create(:item, merchant: @merch_1)
     @item_3 = create(:item, merchant: @merch_1)
 
+    @invoice_3 = create(:invoice)
     @invoice_1 = create(:invoice)
     @invoice_2 = create(:invoice)
-    @invoice_3 = create(:invoice)
 
     @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_3, status: 0)
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, status: 0)
