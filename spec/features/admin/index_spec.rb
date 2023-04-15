@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/admin', type: :feature do
-  before(:all) do
+  before(:each) do
     delete_data
     @cust_1 = create(:customer)
     @cust_2 = create(:customer)
