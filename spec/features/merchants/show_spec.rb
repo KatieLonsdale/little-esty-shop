@@ -78,4 +78,38 @@ RSpec.describe 'merchant show page' do
       end
     end
   end
+
+  describe 'as merchant when I visit the items ready to ship section of the dashboard' do
+    before(:each) do
+      us_4_test_data
+    end
+    it 'shows me my items that have been ordered but not shipped' do
+      visit "/merchants/#{@merch_1.id}/dashboard"
+
+      within("#ready-to-ship") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_no_content(@item_3.name)
+        expect(page).to have_no_content(@item_4.name)
+      end
+    end
+
+    xit 'shows me the invoice id next to each item' do
+
+    end
+
+    xit 'has the invoice show page linked to each invoice id' do
+      
+    end
+  end
+
 end
+
+
+# As a merchant
+# When I visit my merchant dashboard
+# Then I see a section for "Items Ready to Ship"
+# In that section I see a list of the names of all of my items that
+# have been ordered and have not yet been shipped,
+# And next to each Item I see the id of the invoice that ordered my item
+# And each invoice id is a link to my merchant's invoice show page
