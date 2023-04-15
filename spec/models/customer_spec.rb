@@ -9,6 +9,7 @@ RSpec.describe Customer do
 
   describe 'class methods' do
     it '.top_five_cust' do
+      delete_data
       @cust_1 = create(:customer)
       @cust_2 = create(:customer)
       @cust_3 = create(:customer)
@@ -107,9 +108,17 @@ RSpec.describe Customer do
   end
 end
 
+def delete_data
+  Transaction.delete_all
+  InvoiceItem.delete_all
+  Item.delete_all
+  Invoice.delete_all
+  Merchant.delete_all
+  Customer.delete_all
+end
+
 def us_3_test_data
-  Merchant.destroy_all
-  Customer.destroy_all
+  delete_data
   @merch_1 = create(:merchant)
   @merch_2 = create(:merchant)
 
