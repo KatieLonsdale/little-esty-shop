@@ -6,4 +6,8 @@ class InvoiceItem < ApplicationRecord
   def item_name
     item.name
   end
+
+  def invoice_date
+    invoice.created_at.strftime("%A, %B %d, %Y")
+  end
 end
