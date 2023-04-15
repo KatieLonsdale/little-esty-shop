@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe '/admin', type: :feature do
-  before(:each) do
+  before(:all) do
+    delete_data
     @cust_1 = create(:customer)
     @cust_2 = create(:customer)
     @cust_3 = create(:customer)
@@ -90,4 +91,14 @@ RSpec.describe '/admin', type: :feature do
       expect(page).to have_content("#{@cust_5.full_name} - #{@cust_5.success_count} purchases")
     end
   end
+end
+
+
+def delete_data
+  Transaction.delete_all
+  InvoiceItem.delete_all
+  Item.delete_all
+  Invoice.delete_all
+  Merchant.delete_all
+  Customer.delete_all
 end
