@@ -9,6 +9,8 @@ RSpec.describe Customer do
 
   describe 'class methods' do
     it '.top_five_cust' do
+      delete_data
+
       @cust_1 = create(:customer)
       @cust_2 = create(:customer)
       @cust_3 = create(:customer)
@@ -66,6 +68,8 @@ RSpec.describe Customer do
   describe 'instance methods' do
     describe '#success_count' do
       it 'count of successful transactions for a customer' do
+        delete_data
+
         @cust_1 = create(:customer)
         @cust_5 = create(:customer)
         @invoice_1 = create(:invoice, customer: @cust_1)
@@ -87,9 +91,11 @@ RSpec.describe Customer do
         expect(@cust_5.success_count).to eq(2)
       end
     end
-    
+
     describe '#full_name' do
       it 'combines the first and last name of a customer' do
+        delete_data
+
         @cust_1 = create(:customer)
         expect(@cust_1.full_name).to eq("#{@cust_1.first_name} #{@cust_1.last_name}")
       end
@@ -97,8 +103,10 @@ RSpec.describe Customer do
 
     describe '#transaction_count' do
       it 'returns the count of all successful transactions for a merchant by customer' do
+        delete_data
+
         us_3_test_data
-         
+
         expect(@cust_6.transaction_count(@merch_1)).to eq(6)
         expect(@cust_3.transaction_count(@merch_1)).to eq(4)
         expect(@cust_5.transaction_count(@merch_1)).to eq(2)
@@ -107,9 +115,16 @@ RSpec.describe Customer do
   end
 end
 
+def delete_data
+  Transaction.delete_all
+  InvoiceItem.delete_all
+  Item.delete_all
+  Invoice.delete_all
+  Customer.delete_all
+  Merchant.delete_all
+end
+
 def us_3_test_data
-  Merchant.destroy_all
-  Customer.destroy_all
   @merch_1 = create(:merchant)
   @merch_2 = create(:merchant)
 
