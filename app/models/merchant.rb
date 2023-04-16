@@ -7,10 +7,11 @@ class Merchant < ApplicationRecord
 
   def favorite_customers
     customers.joins(:transactions)
-             .where(transactions: {result: 'success'})
+             .where(transactions: {result: 1})
              .select("customers.*, count(DISTINCT transactions.id) as transaction_count")
              .group("customers.id")
-             .order("transaction_count desc").limit(5)
+             .order("transaction_count desc")
+             .limit(5)
   end
 
   def items_ready
