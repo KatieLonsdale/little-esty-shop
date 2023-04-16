@@ -44,7 +44,7 @@ RSpec.describe Invoice do
 
         cust_1 = create(:customer)
         invoice_1 = create(:invoice, status: 0, customer: cust_1)
-        invoice_1.created_at = 'Fri, 15 Apr 2023 20:00:32 UTC +00:00'
+        invoice_1.created_at = 'Sat, 15 Apr 2023 20:00:32'
 
         expect(invoice_1.created_day_mdy).to eq('Saturday, April 15, 2023')
       end
