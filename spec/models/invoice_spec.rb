@@ -1,4 +1,5 @@
 require 'rails_helper'
+require './spec/testable.rb'
 
 RSpec.describe Invoice do
   describe 'relationships' do
@@ -33,13 +34,17 @@ RSpec.describe Invoice do
       end
     end
   end
-end
 
-def delete_data
-  Transaction.delete_all
-  InvoiceItem.delete_all
-  Item.delete_all
-  Invoice.delete_all
-  Customer.delete_all
-  Merchant.delete_all
+  describe 'instance methods' do
+    describe '#created_day_mdy' do
+      it "returns the created date in the format 'Saturday, April 15, 2023'" do
+        delete_data
+
+        cust_1 = create(:customer)
+        invoice_1 = create(:invoice, status: 0, created_at: 2023-04-15, customer: cust_1)
+
+        expect(invoice_1.created_day_mdy).to eq('Saturday, April 15, 2023')
+      end
+    end
+  end
 end
