@@ -152,4 +152,37 @@ module Testable
     create(:invoice_item, item: @item_4, invoice: @invoice_3)
     create(:invoice_item, item: @item_4, invoice: @invoice_3)
   end
+
+  def us_15_test_data
+    delete_data
+
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+
+    @customer_1 = create(:customer, first_name: "Sally", last_name: "Field")
+    @customer_2 = create(:customer, first_name: "Christy", last_name: "Smith")
+
+    @item_1 = create(:item, merchant: @merch_1)
+    @item_2 = create(:item, merchant: @merch_1)
+    @item_3 = create(:item, merchant: @merch_1)
+    @item_4 = create(:item, merchant: @merch_2)
+
+    @invoice_1 = create(:invoice, customer: @customer_1)
+    @invoice_2 = create(:invoice)
+    @invoice_3 = create(:invoice)
+
+    # invoice_1 - all merchant items
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_2, invoice: @invoice_1)
+    create(:invoice_item, item: @item_3, invoice: @invoice_1)
+
+    # invoice_2 - some merchant items
+    create(:invoice_item, item: @item_3, invoice: @invoice_2)
+    create(:invoice_item, item: @item_2, invoice: @invoice_2)
+    create(:invoice_item, item: @item_4, invoice: @invoice_2)
+
+    # invoice_3 - no merchant items
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+  end
 end
