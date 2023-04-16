@@ -4,11 +4,6 @@ class Customer < ApplicationRecord
   has_many :items, through: :invoices
   has_many :merchants, through: :items
 
-
-  def transaction_count(merchant)
-    items.where(merchant_id: merchant.id).count
-  end
-  
   def self.top_five_cust
     joins(:transactions)
     .select("customers.*, count(transactions.id) as transaction_count")
