@@ -26,7 +26,7 @@ module Testable
     @item_1 = create(:item, merchant: @merch_1)
     @item_2 = create(:item, merchant: @merch_2)
 
-    # customer 6 - 6 succ transactions
+    # customer 6 - 7 succ transactions(one with item from different merch)
     # switching cust 6 and 1 to make sure method is able to order on its own
     6.times do
       invoice = create(:invoice, status: 1, customer: @cust_6)
@@ -35,8 +35,8 @@ module Testable
     end
 
     invoice = create(:invoice, status: 1, customer: @cust_6)
-      create(:invoice_item, invoice: invoice, item: @item_2)
-      create(:transaction, result: 1, invoice: invoice)
+    create(:invoice_item, invoice: invoice, item: @item_2)
+    create(:transaction, result: 1, invoice: invoice)
 
     # customer 2 - 5 succ transactions
     5.times do
