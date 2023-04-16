@@ -84,9 +84,9 @@ module Testable
     @item_3 = create(:item, merchant: @merch_1)
     @item_4 = create(:item, merchant: @merch_2)
 
-    @invoice_1 = create(:invoice)
-    @invoice_2 = create(:invoice)
-    @invoice_3 = create(:invoice)
+    @invoice_1 = create(:invoice, status: 1)
+    @invoice_2 = create(:invoice, status: 1)
+    @invoice_3 = create(:invoice, status: 1)
 
     # pending invoice_items - 5 - should appear
     @pending_item_1 = create_list(:invoice_item, 2, item: @item_1, invoice: @invoice_1, status: 0)
