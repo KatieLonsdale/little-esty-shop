@@ -47,7 +47,7 @@ RSpec.describe Customer do
       @trans_4 = create(:transaction, result: 1, invoice: @invoice_4)
       @trans_5 = create(:transaction, result: 1, invoice: @invoice_5)
       @trans_6 = create(:transaction, result: 1, invoice: @invoice_6)
-      @trans_7 = create(:transaction, result: 1, invoice: @invoice_6)
+      @trans_7 = create(:transaction, result: 1, invoice: @invoice_7)
       @trans_8 = create(:transaction, result: 1, invoice: @invoice_8)
       @trans_9 = create(:transaction, result: 1, invoice: @invoice_9)
       @trans_10 = create(:transaction, result: 1, invoice: @invoice_10)
