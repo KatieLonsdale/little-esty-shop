@@ -8,6 +8,10 @@
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </div>
 
+<div id="dashboard">
+  <%= link_to 'Dashboard', "merchants/#{@merchant.id}/dashboard"  %>
+</div>
+
 <div id="favorite-customers">
   <ol>
   <h5>Favorite Customers</h5>
