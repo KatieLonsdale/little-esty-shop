@@ -2,6 +2,7 @@ class Customer < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :transactions, through: :invoices
   has_many :items, through: :invoices
+  has_many :merchants, through: :items
 
 
   def transaction_count(merchant)
