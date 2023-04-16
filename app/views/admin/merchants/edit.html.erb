@@ -1,0 +1,13 @@
+<h3>Edit Merchant</h3>
+
+<%= form_with url: admin_merchant_path(@merchant), model: @merchant, local: true do |f| %>
+
+  <div id="field">
+    <%= f.label :name %>
+    <%= f.text_field :name, value: @merchant.name %>
+  </div>
+
+  <div id="actions">
+    <%= f.submit "Update Merchant" %>
+  </div>
+<% end %>
