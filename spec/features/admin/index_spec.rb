@@ -81,5 +81,30 @@ RSpec.describe '/admin', type: :feature do
         expect(page).to_not have_content("Invoice ##{@invoice_6.id}")
       end
     end
+
+    describe 'User Story 23' do
+      before(:all) do
+        delete_data
+
+        @cust_1 = create(:customer)
+        @invoice_1 = create(:invoice, status: 0, created_at: 1.month.ago, customer: @cust_1)
+        @invoice_4 = create(:invoice, status: 0, created_at: 10.days.ago, customer: @cust_1)
+        @invoice_5 = create(:invoice, status: 0, created_at: 2.days.ago, customer: @cust_1)
+        @invoice_7 = create(:invoice, status: 0, created_at: Time.now, customer: @cust_1)
+      end
+
+      it "Next to each invoice id I see the invoice creation date formatted like 'Monday, July 18, 2019'" do
+        expect(page).to have_content("Invoice ##{@invoice_1.id} - #{@invoice_1.created_day_mdy}")
+        expect(page).to have_content("Invoice ##{@invoice_4.id} - #{@invoice_4.created_day_mdy}")
+        expect(page).to have_content("Invoice ##{@invoice_5.id} - #{@invoice_5.created_day_mdy}")
+        expect(page).to have_content("Invoice ##{@invoice_7.id} - #{@invoice_7.created_day_mdy}")
+      end
+
+      it 'And I see that the incomplete invoices list is ordered from oldest to newest' do
+        expect("Invoice ##{@invoice_1.id}").to appear_before("Invoice ##{@invoice_4.id}")
+        expect("Invoice ##{@invoice_4.id}").to appear_before("Invoice ##{@invoice_5.id}")
+        expect("Invoice ##{@invoice_5.id}").to appear_before("Invoice ##{@invoice_7.id}")
+      end
+    end
   end
 end
