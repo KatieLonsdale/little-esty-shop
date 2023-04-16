@@ -121,4 +121,35 @@ module Testable
     @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, status: 0)
     @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_2, status: 0)
   end
+
+  def us_14_test_data
+    delete_data
+
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+
+    @item_1 = create(:item, merchant: @merch_1)
+    @item_2 = create(:item, merchant: @merch_1)
+    @item_3 = create(:item, merchant: @merch_1)
+    @item_4 = create(:item, merchant: @merch_2)
+
+    @invoice_1 = create(:invoice)
+    @invoice_2 = create(:invoice)
+    # should not appear on invoices index
+    @invoice_3 = create(:invoice)
+
+    # invoice_1 - all merchant items
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_2, invoice: @invoice_1)
+    create(:invoice_item, item: @item_3, invoice: @invoice_1)
+
+    # invoice_2 - some merchant items
+    create(:invoice_item, item: @item_3, invoice: @invoice_2)
+    create(:invoice_item, item: @item_2, invoice: @invoice_2)
+    create(:invoice_item, item: @item_4, invoice: @invoice_2)
+
+    # invoice_3 - no merchant items
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+  end
 end

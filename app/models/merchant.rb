@@ -16,4 +16,8 @@ class Merchant < ApplicationRecord
   def items_ready
     invoice_items.where.not(status: 2).distinct.order(:invoice_id, :id)
   end
+
+  def unique_invoices
+    invoices.distinct
+  end
 end
