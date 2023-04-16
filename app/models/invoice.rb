@@ -8,4 +8,8 @@ class Invoice < ApplicationRecord
   def self.in_progress
     where("status = 0")
   end
+
+  def created_day_mdy
+    created_at.strftime('%A, %B %d, %Y')
+  end
 end
