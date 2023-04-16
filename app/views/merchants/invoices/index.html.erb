@@ -12,6 +12,10 @@
   <h5>My Invoices</h5>
   <ul>
   <% @merchant.unique_invoices.each do |invoice| %>
-  <li><%= "Invoice ##{invoice.id}" %>
+    <div id="invoice-<%= invoice.id %>">
+      <li><%= "Invoice " %>
+      <%= link_to "##{invoice.id}", "/merchants/#{@merchant.id}/invoices/#{invoice.id}" %></li>
+    </div>
   <% end %>
+  </ul>
 </div>
