@@ -14,7 +14,7 @@
   </div>
   <div>
       <% @incomplete_invoices.each do |invoice| %>
-        <p>Invoice #<%= invoice.id %></p>
+        <p>Invoice #<%= invoice.id %> - <%= invoice.created_day_mdy %></p>
       <% end %>
   </div>
 </div>
