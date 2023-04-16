@@ -1,0 +1,17 @@
+<h4><%= @merchant.name %></h4>
+
+<div id="my-items">
+  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+</div>
+
+<div id="my-invoices">
+  <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+</div>
+
+<div id="my-invoices-list">
+  <h5>My Invoices</h5>
+  <ul>
+  <% @merchant.unique_invoices.each do |invoice| %>
+  <li><%= "Invoice ##{invoice.id}" %>
+  <% end %>
+</div>
