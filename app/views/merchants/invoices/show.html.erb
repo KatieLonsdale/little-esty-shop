@@ -29,6 +29,9 @@
 <br>
 <div id="items-on-invoice">
   <% Item.found_on_invoice(@merchant, @invoice).each do |item| %>
-    <%= item.name %><br>
+    <div id="item-<%= item.id %>">
+      <%= item.name %>
+      <%= @invoice.item_qty_ordered(item) %><br>
+    </div>
   <% end %>
 </div>
