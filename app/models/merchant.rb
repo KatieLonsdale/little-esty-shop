@@ -22,4 +22,8 @@ class Merchant < ApplicationRecord
   def unique_invoices
     invoices.distinct
   end
+
+  def items_on_invoice(invoice)
+    invoice.items.where(merchant_id: id).distinct
+  end
 end
