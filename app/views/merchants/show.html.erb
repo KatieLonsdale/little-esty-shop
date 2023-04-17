@@ -17,7 +17,7 @@
   <h5>Favorite Customers</h5>
   <% @merchant.favorite_customers.each do |customer| %>
    <div id="customer-<%= customer.id %>">
-   <li><%= "#{customer.full_name} - #{customer.transaction_count} purchases" %></li>
+   <li><%= "#{customer.full_name} - #{customer.purchase_count} purchases" %></li>
    </div>
   <% end %> 
   </ol>
