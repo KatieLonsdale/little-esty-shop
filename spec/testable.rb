@@ -185,4 +185,30 @@ module Testable
     create(:invoice_item, item: @item_4, invoice: @invoice_3)
     create(:invoice_item, item: @item_4, invoice: @invoice_3)
   end
+
+  def us_16_test_data
+    delete_data
+
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+
+    @customer_1 = create(:customer, first_name: "Sally", last_name: "Field")
+
+    @item_1 = create(:item, merchant: @merch_1)
+    @item_2 = create(:item, merchant: @merch_1)
+    # should not appear, not on invoice
+    @item_3 = create(:item, merchant: @merch_1)
+    # should not appear, not right merchant
+    @item_4 = create(:item, merchant: @merch_2)
+
+    @invoice_1 = create(:invoice)
+
+    # mix of merchant 1 and 2 items
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_2, invoice: @invoice_1)
+    create(:invoice_item, item: @item_2, invoice: @invoice_1)
+    create(:invoice_item, item: @item_4, invoice: @invoice_1)
+  end
 end
