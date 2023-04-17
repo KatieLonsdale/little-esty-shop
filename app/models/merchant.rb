@@ -24,6 +24,8 @@ class Merchant < ApplicationRecord
   end
 
   def items_on_invoice(invoice)
-    invoice.items.where(merchant_id: id).distinct
+    invoice_items.joins(:item)
+                 .where("items.merchant_id=? and invoice_id=?",id,invoice)
+                 .order("items.name")
   end
 end
