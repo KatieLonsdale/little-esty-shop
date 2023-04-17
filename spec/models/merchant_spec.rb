@@ -12,6 +12,13 @@ RSpec.describe Merchant do
     it { should have_many(:transactions).through(:invoices) }
   end
 
+  describe 'enum' do
+    it 'defines status as enum' do
+      should define_enum_for(:status).
+        with_values(disabled: 0, enabled: 1)
+    end
+  end
+
   describe '#instance methods' do
     describe '#favorite_customers' do
       before(:each) do
