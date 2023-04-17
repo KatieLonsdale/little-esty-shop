@@ -61,6 +61,16 @@ RSpec.describe 'merchants invoice show page' do
         expect(page).to have_no_content(@item_4.name)
       end
     end
+    it "shows the quantity ordered of the item" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      save_and_open_page
+      within("#item-#{@item_1.id}") do
+        expect(page).to have_content(3)
+      end
+      within("#item-#{@item_2.id}") do
+        expect(page).to have_content(2)
+      end
+    end
   end
 end
 
