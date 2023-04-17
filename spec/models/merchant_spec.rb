@@ -33,8 +33,8 @@ RSpec.describe Merchant do
     describe '#unique_invoices' do
       it 'returns an array of unique invoices with an item that belong to merchant' do
         us_14_test_data
-        expect(@merch_1.unique_invoices).to eq([@invoice_1, @invoice_2])
-        expect(@merch_2.unique_invoices).to eq([@invoice_2, @invoice_3])
+        expect(@merch_1.unique_invoices.sort).to eq([@invoice_1, @invoice_2])
+        expect(@merch_2.unique_invoices.sort).to eq([@invoice_2, @invoice_3])
       end
     end
   end
