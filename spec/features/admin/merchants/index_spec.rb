@@ -67,6 +67,24 @@ RSpec.describe '/admin/merchants', type: :feature do
         end
       end
     end
+
+    describe 'User Story 28' do
+      it 'I see two sections for each of "Enabled/Disabled Merchants" and merchants listed accordingly' do
+        within("#enabled-merchants") do
+          expect(page).to have_content("Enabled Merchants")
+          expect(page).to_not have_content(@merch_1.name)
+          expect(page).to have_content(@merch_2.name)
+          expect(page).to have_content(@merch_3.name)
+        end
+
+        within("#disabled-merchants") do
+          expect(page).to have_content("Disabled Merchants")
+          expect(page).to have_content(@merch_1.name)
+          expect(page).to_not have_content(@merch_2.name)
+          expect(page).to_not have_content(@merch_3.name)
+        end
+      end
+    end
   end
 end
 

@@ -8,11 +8,12 @@
   <%= link_to 'Invoices', '/admin/invoices', method: :get %>
 </div>
 
-<div>
-  <% @merchants.each do |merchant|%>
-    <div id="merchant-<%= merchant.id %>">
-      <p><%=  link_to "#{merchant.name}", admin_merchant_path(merchant) %></p>
-      <p><%=  button_to "#{merchant.opposite_status}", admin_merchant_path(merchant), method: :patch %></p>
-    </div>
-  <% end %>
+<div id="enabled-merchants">
+<h3>Enabled Merchants</h3>
+<%= render partial: "merchant_list", locals: { merchants: @merchants.enabled } %>
+</div>
+
+<div id="disabled-merchants">
+<h3>Disabled Merchants</h3>
+  <%= render partial: "merchant_list", locals: { merchants: @merchants.disabled } %>
 </div>
