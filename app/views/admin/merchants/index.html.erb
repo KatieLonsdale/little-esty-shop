@@ -10,6 +10,9 @@
 
 <div>
   <% @merchants.each do |merchant|%>
-    <p><%=  link_to "#{merchant.name}", admin_merchant_path(merchant) %></p>
+    <div id="merchant-<%= merchant.id %>">
+      <p><%=  link_to "#{merchant.name}", admin_merchant_path(merchant) %></p>
+      <p><%=  button_to "#{merchant.opposite_status}", admin_merchant_path(merchant), method: :patch %></p>
+    </div>
   <% end %>
 </div>
