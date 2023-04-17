@@ -32,4 +32,5 @@ RSpec.describe Customer do
         expect(@cust_5.transaction_count(@merch_1)).to eq(2)
       end
     end
+  end
 end
