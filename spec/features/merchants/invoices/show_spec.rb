@@ -43,4 +43,28 @@ RSpec.describe 'merchants invoice show page' do
       end
     end
   end
+  describe "When I visit my merchant's invoice show page - invoice item info" do
+    before(:all) do
+      us_16_test_data
+    end
+    it "displays all items on the invoice" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#items-on-invoice") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_no_content(@item_3.name)
+      end
+    end
+    it "does not show other merchants' items" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#items-on-invoice") do
+        expect(page).to have_no_content(@item_4.name)
+      end
+    end
+  end
 end
+
+# Item name
+# The quantity of the item ordered
+# The price the Item sold for
+# The Invoice Item status
