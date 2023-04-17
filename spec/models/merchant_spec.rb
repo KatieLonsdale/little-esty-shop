@@ -44,5 +44,15 @@ RSpec.describe Merchant do
         expect(@merch_2.unique_invoices.sort).to eq([@invoice_2, @invoice_3])
       end
     end
+
+    describe '#opposite_status' do 
+      it 'returns the opposite status' do
+        merchant1 = create(:merchant, status: 0)
+        merchant2 = create(:merchant, status: 1)
+
+        expect(merchant1.opposite_status).to eq('Enable')
+        expect(merchant2.opposite_status).to eq('Disable')
+      end
+    end
   end
 end
