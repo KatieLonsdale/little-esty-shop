@@ -15,14 +15,20 @@
 <div id="subheader-bar">
   Invoice #<%= @invoice.id %>
 </div>
-
+<br>
 <div id="invoice-info">
   Status: <%= @invoice.status %><br>
   <br>
   Created on: <%= @invoice.created_day_mdy %><br>
 </div>
-
+<br>
 <div id="customer-info">
   <h5>Customer:</h5>
   <%= @invoice.customer.full_name %>
+</div>
+<br>
+<div id="items-on-invoice">
+  <% Item.found_on_invoice(@merchant, @invoice).each do |item| %>
+    <%= item.name %><br>
+  <% end %>
 </div>
