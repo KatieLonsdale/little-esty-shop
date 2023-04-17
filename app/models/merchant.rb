@@ -8,16 +8,10 @@ class Merchant < ApplicationRecord
   def favorite_customers
     customers.joins(transactions: [invoice: { invoice_items: :item }])
              .where("items.merchant_id = ? AND transactions.result = ?", id, 1)
-             .select("customers.*, COUNT(DISTINCT transactions.id) AS transaction_count")
+             .select("customers.*, COUNT(DISTINCT invoice_items.id) AS purchase_count")
              .group("customers.id")
-             .order("transaction_count DESC")
+             .order("purchase_count DESC")
              .limit(5)
-    # .joins(transactions: [invoice: { invoice_items: :item }])
-    #          .where("transactions.result = ? AND items.merchant_id = ?", 1, id)
-    #          .select("customers.*, count(DISTINCT transactions.id) as successful_transactions")
-    #          .group("customers.id")
-    #          .order("successful_transactions desc")
-    #          .limit(5)
   end
 
   def items_ready
