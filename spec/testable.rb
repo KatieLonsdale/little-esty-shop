@@ -26,7 +26,7 @@ module Testable
     @item_1 = create(:item, merchant: @merch_1)
     @item_2 = create(:item, merchant: @merch_2)
 
-    # customer 6 - 6 succ transactions
+    # customer 6 - 7 succ transactions(one with item from different merch)
     # switching cust 6 and 1 to make sure method is able to order on its own
     6.times do
       invoice = create(:invoice, status: 1, customer: @cust_6)
@@ -35,8 +35,8 @@ module Testable
     end
 
     invoice = create(:invoice, status: 1, customer: @cust_6)
-      create(:invoice_item, invoice: invoice, item: @item_2)
-      create(:transaction, result: 1, invoice: invoice)
+    create(:invoice_item, invoice: invoice, item: @item_2)
+    create(:transaction, result: 1, invoice: invoice)
 
     # customer 2 - 5 succ transactions
     5.times do
@@ -84,9 +84,9 @@ module Testable
     @item_3 = create(:item, merchant: @merch_1)
     @item_4 = create(:item, merchant: @merch_2)
 
-    @invoice_1 = create(:invoice)
-    @invoice_2 = create(:invoice)
-    @invoice_3 = create(:invoice)
+    @invoice_1 = create(:invoice, status: 1)
+    @invoice_2 = create(:invoice, status: 1)
+    @invoice_3 = create(:invoice, status: 1)
 
     # pending invoice_items - 5 - should appear
     @pending_item_1 = create_list(:invoice_item, 2, item: @item_1, invoice: @invoice_1, status: 0)
@@ -136,6 +136,39 @@ module Testable
     @invoice_1 = create(:invoice)
     @invoice_2 = create(:invoice)
     # should not appear on invoices index
+    @invoice_3 = create(:invoice)
+
+    # invoice_1 - all merchant items
+    create(:invoice_item, item: @item_1, invoice: @invoice_1)
+    create(:invoice_item, item: @item_2, invoice: @invoice_1)
+    create(:invoice_item, item: @item_3, invoice: @invoice_1)
+
+    # invoice_2 - some merchant items
+    create(:invoice_item, item: @item_3, invoice: @invoice_2)
+    create(:invoice_item, item: @item_2, invoice: @invoice_2)
+    create(:invoice_item, item: @item_4, invoice: @invoice_2)
+
+    # invoice_3 - no merchant items
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+    create(:invoice_item, item: @item_4, invoice: @invoice_3)
+  end
+
+  def us_15_test_data
+    delete_data
+
+    @merch_1 = create(:merchant)
+    @merch_2 = create(:merchant)
+
+    @customer_1 = create(:customer, first_name: "Sally", last_name: "Field")
+    @customer_2 = create(:customer, first_name: "Christy", last_name: "Smith")
+
+    @item_1 = create(:item, merchant: @merch_1)
+    @item_2 = create(:item, merchant: @merch_1)
+    @item_3 = create(:item, merchant: @merch_1)
+    @item_4 = create(:item, merchant: @merch_2)
+
+    @invoice_1 = create(:invoice, customer: @customer_1)
+    @invoice_2 = create(:invoice)
     @invoice_3 = create(:invoice)
 
     # invoice_1 - all merchant items

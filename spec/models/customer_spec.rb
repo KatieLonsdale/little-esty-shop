@@ -8,6 +8,7 @@ RSpec.describe Customer do
     it { should have_many :invoices }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:items).through(:invoices) }
+    it { should have_many(:merchants).through(:items) }
   end
 
   describe 'class methods' do
@@ -101,18 +102,6 @@ RSpec.describe Customer do
 
         @cust_1 = create(:customer)
         expect(@cust_1.full_name).to eq("#{@cust_1.first_name} #{@cust_1.last_name}")
-      end
-    end
-
-    describe '#transaction_count' do
-      it 'returns the count of all successful transactions for a merchant by customer' do
-        delete_data
-
-        us_3_test_data
-
-        expect(@cust_6.transaction_count(@merch_1)).to eq(6)
-        expect(@cust_3.transaction_count(@merch_1)).to eq(4)
-        expect(@cust_5.transaction_count(@merch_1)).to eq(2)
       end
     end
   end

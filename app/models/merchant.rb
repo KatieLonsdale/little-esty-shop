@@ -7,14 +7,16 @@ class Merchant < ApplicationRecord
 
   def favorite_customers
     customers.joins(:transactions)
-             .where(transactions: {result: 'success'})
+             .where(transactions: {result: 1})
              .select("customers.*, count(DISTINCT transactions.id) as transaction_count")
              .group("customers.id")
-             .order("transaction_count desc").limit(5)
+             .order("transaction_count desc")
+             .limit(5)
   end
 
   def items_ready
-    invoice_items.where.not(status: 2).distinct.order(:invoice_id, :id)
+    ready_items = invoice_items.where.not(status: 2).distinct.order(:invoice_id, :id)
+    ready_items.sort_by {|ii| [ii.invoice.created_at, ii.created_at]}
   end
 
   def unique_invoices

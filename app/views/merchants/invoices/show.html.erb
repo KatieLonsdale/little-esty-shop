@@ -1,0 +1,28 @@
+<h4><%= @merchant.name %></h4>
+
+<div id="my-items">
+  <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
+</div>
+
+<div id="my-invoices">
+  <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
+</div>
+
+<div id="dashboard">
+  <%= link_to 'Dashboard', "/merchants/#{@merchant.id}/dashboard"  %>
+</div>
+
+<div id="subheader-bar">
+  Invoice #<%= @invoice.id %>
+</div>
+
+<div id="invoice-info">
+  Status: <%= @invoice.status %><br>
+  <br>
+  Created on: <%= @invoice.created_day_mdy %><br>
+</div>
+
+<div id="customer-info">
+  <h5>Customer:</h5>
+  <%= @invoice.customer.full_name %>
+</div>

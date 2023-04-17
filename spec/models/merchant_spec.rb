@@ -26,8 +26,7 @@ RSpec.describe Merchant do
         us_4_test_data
       end
       it 'returns array of invoice_items that are not shipped ordered by invoice age(oldest to newest)' do
-        array = [@pending_item_1, @pending_item_2, @packaged_item_1, @packaged_item_2].flatten
-        expected = array.sort_by {|ii| [ii.invoice.id, ii.id]}
+        expected = [@pending_item_1, @pending_item_2, @packaged_item_2, @packaged_item_1].flatten
         expect(@merch_1.items_ready).to eq(expected)
       end
     end
