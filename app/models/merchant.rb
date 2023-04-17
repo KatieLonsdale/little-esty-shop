@@ -23,4 +23,12 @@ class Merchant < ApplicationRecord
   def unique_invoices
     invoices.distinct
   end
+
+  def opposite_status
+    if self.enabled?
+      'Disable'
+    else
+      'Enable'
+    end
+  end
 end
