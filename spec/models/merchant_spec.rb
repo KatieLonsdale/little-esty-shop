@@ -12,6 +12,13 @@ RSpec.describe Merchant do
     it { should have_many(:transactions).through(:invoices) }
   end
 
+  describe 'enum' do
+    it 'defines status as enum' do
+      should define_enum_for(:status).
+        with_values(disabled: 0, enabled: 1)
+    end
+  end
+
   describe '#instance methods' do
     describe '#favorite_customers' do
       before(:each) do
@@ -35,6 +42,16 @@ RSpec.describe Merchant do
         us_14_test_data
         expect(@merch_1.unique_invoices.sort).to eq([@invoice_1, @invoice_2])
         expect(@merch_2.unique_invoices.sort).to eq([@invoice_2, @invoice_3])
+      end
+    end
+
+    describe '#opposite_status' do 
+      it 'returns the opposite status' do
+        merchant1 = create(:merchant, status: 0)
+        merchant2 = create(:merchant, status: 1)
+
+        expect(merchant1.opposite_status).to eq('Enable')
+        expect(merchant2.opposite_status).to eq('Disable')
       end
     end
   end

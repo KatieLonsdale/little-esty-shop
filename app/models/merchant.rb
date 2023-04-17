@@ -4,6 +4,7 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+  enum status: { disabled: 0, enabled: 1 }
 
   def favorite_customers
     customers.joins(transactions: [invoice: { invoice_items: :item }])
@@ -21,5 +22,13 @@ class Merchant < ApplicationRecord
 
   def unique_invoices
     invoices.distinct
+  end
+
+  def opposite_status
+    if self.enabled?
+      'Disable'
+    else
+      'Enable'
+    end
   end
 end
