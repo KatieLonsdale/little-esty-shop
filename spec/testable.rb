@@ -204,11 +204,11 @@ module Testable
     @invoice_1 = create(:invoice)
 
     # mix of merchant 1 and 2 items
-    create(:invoice_item, item: @item_1, invoice: @invoice_1)
-    create(:invoice_item, item: @item_1, invoice: @invoice_1)
-    create(:invoice_item, item: @item_1, invoice: @invoice_1)
-    create(:invoice_item, item: @item_2, invoice: @invoice_1)
-    create(:invoice_item, item: @item_2, invoice: @invoice_1)
-    create(:invoice_item, item: @item_4, invoice: @invoice_1)
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 349)
+    @invoice_item_2 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 399)
+    @invoice_item_3 = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 325)
+    @invoice_item_4 = create(:invoice_item, item: @item_2, invoice: @invoice_1, unit_price: 1499)
+    @invoice_item_5 = create(:invoice_item, item: @item_2, invoice: @invoice_1, unit_price: 1450)
+    @invoice_item_6 = create(:invoice_item, item: @item_4, invoice: @invoice_1, unit_price: 5899)
   end
 end
