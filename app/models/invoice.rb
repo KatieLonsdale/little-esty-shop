@@ -12,8 +12,4 @@ class Invoice < ApplicationRecord
   def created_day_mdy
     created_at.strftime('%A, %B %d, %Y')
   end
-
-  def item_qty_ordered(item)
-    invoice_items.where(item_id: item).count
-  end
 end
