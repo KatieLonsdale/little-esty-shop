@@ -4,6 +4,7 @@ class Merchant < ApplicationRecord
   has_many :invoices, through: :invoice_items
   has_many :customers, through: :invoices
   has_many :transactions, through: :invoices
+  enum status: { disabled: 0, enabled: 1 }
 
   def favorite_customers
     customers.joins(transactions: [invoice: { invoice_items: :item }])
@@ -28,4 +29,13 @@ class Merchant < ApplicationRecord
                  .where("items.merchant_id=? and invoice_id=?",id,invoice)
                  .order("items.name")
   end
+
+  def opposite_status
+    if self.enabled?
+      'Disable'
+    else
+      'Enable'
+    end
+  end
 end
+

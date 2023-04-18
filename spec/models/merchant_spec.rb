@@ -12,6 +12,13 @@ RSpec.describe Merchant do
     it { should have_many(:transactions).through(:invoices) }
   end
 
+  describe 'enum' do
+    it 'defines status as enum' do
+      should define_enum_for(:status).
+        with_values(disabled: 0, enabled: 1)
+    end
+  end
+
   describe '#instance methods' do
     describe '#favorite_customers' do
       before(:each) do
@@ -37,12 +44,23 @@ RSpec.describe Merchant do
         expect(@merch_2.unique_invoices.sort).to eq([@invoice_2, @invoice_3])
       end
     end
+
     describe "#items_on_invoice" do
       it "returns all items found on given invoice for given merchant" do
         us_16_test_data
         expected = [@invoice_item_1, @invoice_item_2]
         results = @merch_1.items_on_invoice(@invoice_1).sort_by{|ii| ii.id}
         expect(results).to eq(expected)
+      end
+    end
+    
+    describe '#opposite_status' do 
+      it 'returns the opposite status' do
+        merchant1 = create(:merchant, status: 0)
+        merchant2 = create(:merchant, status: 1)
+
+        expect(merchant1.opposite_status).to eq('Enable')
+        expect(merchant2.opposite_status).to eq('Disable')
       end
     end
   end
