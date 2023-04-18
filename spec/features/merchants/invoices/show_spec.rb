@@ -72,12 +72,21 @@ RSpec.describe 'merchants invoice show page' do
     end
     it "shows the price the item sold for formatted as price" do
       visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
-      save_and_open_page
-
-      expect(page).to have_content("$3.49")
-      expect(page).to have_content("$14.50")
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content("$3.49")
+      end
+      within("#item-#{@invoice_item_2.id}") do
+        expect(page).to have_content("$14.50")
+      end
+    end
+    it "shows the status of the items" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content(@invoice_item_1.status)
+      end
+      within("#item-#{@invoice_item_2.id}") do
+        expect(page).to have_content(@invoice_item_2.status)
+      end
     end
   end
 end
-
-# The Invoice Item status
