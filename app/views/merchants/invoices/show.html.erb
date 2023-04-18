@@ -15,14 +15,26 @@
 <div id="subheader-bar">
   Invoice #<%= @invoice.id %>
 </div>
-
+<br>
 <div id="invoice-info">
   Status: <%= @invoice.status %><br>
   <br>
   Created on: <%= @invoice.created_day_mdy %><br>
 </div>
-
+<br>
 <div id="customer-info">
   <h5>Customer:</h5>
   <%= @invoice.customer.full_name %>
+</div>
+<br>
+<div id="items-on-invoice">
+  <% @merchant.items_on_invoice(@invoice).each do |ii| %>
+    <div id="item-<%= ii.id %>">
+      <%= ii.item.name %>
+      <%= ii.quantity %>
+      <%= number_to_currency(ii.unit_price.to_f / 100) %>
+      <%= ii.status %>
+      <br>
+    </div>
+  <% end %>
 </div>

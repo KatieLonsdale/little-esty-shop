@@ -15,7 +15,7 @@
 <div id="my-items-list">
   <% @items.each do |item| %>
    <div id="item-<%= item.id %>">
-   <li><%= "#{item.name}" %></li>
+   <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"%></li>
    </div>
   <% end %> 
   
