@@ -72,7 +72,7 @@ RSpec.describe 'merchants invoice show page' do
     end
     it "shows the price the item sold for formatted as price" do
       visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
-      save
+      save_and_open_page
 
       expect(page).to have_content("$3.49")
       expect(page).to have_content("$14.50")
