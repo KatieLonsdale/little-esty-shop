@@ -1,4 +1,4 @@
-<h1>Admin Dashboard</h1>
+<h3>Admin Dashboard</h3>
 
 <div id="merchants">
   <%= link_to 'Merchants', '/admin/merchants', method: :get %>
@@ -14,7 +14,7 @@
   </div>
   <div>
     <ol>
-      <% @top_cust.each do |cust| %>
+      <% @top_cust.top_five_cust.each do |cust| %>
         <li><%= cust.full_name  %> - <%= cust.success_count %> purchases</li>
       <% end %>
     </ol>
