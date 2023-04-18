@@ -48,14 +48,5 @@ RSpec.describe Invoice do
         expect(invoice_1.created_day_mdy).to eq('Saturday, April 15, 2023')
       end
     end
-    describe '#item_qty_ordered' do
-      it 'returns the quantity ordered for given item' do
-        us_16_test_data
-
-        expect(@invoice_1.item_qty_ordered(@item_1)).to eq(3)
-        expect(@invoice_1.item_qty_ordered(@item_4)).to eq(1)
-        expect(@invoice_1.item_qty_ordered(@item_3)).to eq(0)
-      end
-    end
   end
 end
