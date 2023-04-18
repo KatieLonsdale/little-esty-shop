@@ -45,6 +45,15 @@ RSpec.describe Merchant do
       end
     end
 
+    describe "#items_on_invoice" do
+      it "returns all items found on given invoice for given merchant" do
+        us_16_test_data
+        expected = [@invoice_item_1, @invoice_item_2]
+        results = @merch_1.items_on_invoice(@invoice_1).sort_by{|ii| ii.id}
+        expect(results).to eq(expected)
+      end
+    end
+    
     describe '#opposite_status' do 
       it 'returns the opposite status' do
         merchant1 = create(:merchant, status: 0)

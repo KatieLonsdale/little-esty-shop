@@ -43,4 +43,50 @@ RSpec.describe 'merchants invoice show page' do
       end
     end
   end
+  describe "When I visit my merchant's invoice show page - invoice item info" do
+    before(:all) do
+      us_16_test_data
+    end
+    it "displays all items on the invoice" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#items-on-invoice") do
+        expect(page).to have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_no_content(@item_3.name)
+      end
+    end
+    it "does not show other merchants' items" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#items-on-invoice") do
+        expect(page).to have_no_content(@item_4.name)
+      end
+    end
+    it "shows the quantity ordered of the item" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content(3)
+      end
+      within("#item-#{@invoice_item_2.id}") do
+        expect(page).to have_content(2)
+      end
+    end
+    it "shows the price the item sold for formatted as price" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content("$3.49")
+      end
+      within("#item-#{@invoice_item_2.id}") do
+        expect(page).to have_content("$14.50")
+      end
+    end
+    it "shows the status of the items" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content(@invoice_item_1.status)
+      end
+      within("#item-#{@invoice_item_2.id}") do
+        expect(page).to have_content(@invoice_item_2.status)
+      end
+    end
+  end
 end

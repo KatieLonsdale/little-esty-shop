@@ -24,6 +24,12 @@ class Merchant < ApplicationRecord
     invoices.distinct
   end
 
+  def items_on_invoice(invoice)
+    invoice_items.joins(:item)
+                 .where("items.merchant_id=? and invoice_id=?",id,invoice)
+                 .order("items.name")
+  end
+
   def opposite_status
     if self.enabled?
       'Disable'
@@ -32,3 +38,4 @@ class Merchant < ApplicationRecord
     end
   end
 end
+

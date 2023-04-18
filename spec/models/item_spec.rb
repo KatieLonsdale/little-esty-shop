@@ -1,4 +1,7 @@
 require 'rails_helper'
+require './spec/testable'
+
+include Testable
 
 RSpec.describe Item do
   describe 'relationships' do

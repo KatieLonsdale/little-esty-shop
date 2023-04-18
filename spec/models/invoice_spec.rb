@@ -36,7 +36,6 @@ RSpec.describe Invoice do
       end
     end
   end
-
   describe 'instance methods' do
     describe '#created_day_mdy' do
       it "returns the created date in the format 'Saturday, April 15, 2023'" do
