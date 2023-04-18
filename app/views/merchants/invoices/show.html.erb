@@ -21,8 +21,7 @@
   <br>
   Created on: <%= @invoice.created_day_mdy %><br>
   <br>
-  <% revenue = @merchant.total_revenue(@invoice)%>
-  Total Revenue: <%= number_to_currency(revenue.to_f / 100) %>
+  Total Revenue: <%= number_to_currency(@merchant.total_revenue(@invoice).to_f / 100) %>
 </div>
 <br>
 <div id="customer-info">
