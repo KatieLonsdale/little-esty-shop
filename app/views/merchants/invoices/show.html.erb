@@ -28,10 +28,11 @@
 </div>
 <br>
 <div id="items-on-invoice">
-  <% @merchant.items_on_invoice(@invoice).each do |item| %>
-    <div id="item-<%= item.id %>">
-      <%= item.name %>
-      <%= @invoice.item_qty_ordered(item) %>
+  <% @merchant.items_on_invoice(@invoice).each do |ii| %>
+    <div id="item-<%= ii.id %>">
+      <%= ii.item.name %>
+      <%= ii.quantity %>
+      <%= number_to_currency(ii.unit_price.to_f / 100) %>
       <br>
     </div>
   <% end %>
