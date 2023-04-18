@@ -1,9 +1,12 @@
 require 'rails_helper'
+require './spec/testable.rb'
+
+include Testable
+
 RSpec.describe 'merchant items index page' do
   describe 'when I visit my my items index page' do
     before(:all) do
-      Item.delete_all
-      Merchant.delete_all
+      delete_data
       @merch_1 = create(:merchant)
       @merch_2 = create(:merchant)
       create_list(:item, 10, merchant_id: @merch_1.id)

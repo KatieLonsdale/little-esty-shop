@@ -8,6 +8,10 @@
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </div>
 
+<div id="dashboard">
+  <%= link_to 'Dashboard', "/merchants/#{@merchant.id}/dashboard"  %>
+</div>
+
 <div id="my-items-list">
   <% @items.each do |item| %>
    <div id="item-<%= item.id %>">

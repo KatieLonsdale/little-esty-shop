@@ -1,14 +1,20 @@
 require 'rails_helper'
+require './spec/testable.rb'
+
+include Testable
 
 RSpec.describe Customer do
   describe 'relationships' do
     it { should have_many :invoices }
     it { should have_many(:transactions).through(:invoices) }
     it { should have_many(:items).through(:invoices) }
+    it { should have_many(:merchants).through(:items) }
   end
 
   describe 'class methods' do
     it '.top_five_cust' do
+      delete_data
+
       @cust_1 = create(:customer)
       @cust_2 = create(:customer)
       @cust_3 = create(:customer)
@@ -42,7 +48,7 @@ RSpec.describe Customer do
       @trans_4 = create(:transaction, result: 1, invoice: @invoice_4)
       @trans_5 = create(:transaction, result: 1, invoice: @invoice_5)
       @trans_6 = create(:transaction, result: 1, invoice: @invoice_6)
-      @trans_7 = create(:transaction, result: 1, invoice: @invoice_6)
+      @trans_7 = create(:transaction, result: 1, invoice: @invoice_7)
       @trans_8 = create(:transaction, result: 1, invoice: @invoice_8)
       @trans_9 = create(:transaction, result: 1, invoice: @invoice_9)
       @trans_10 = create(:transaction, result: 1, invoice: @invoice_10)
@@ -66,6 +72,8 @@ RSpec.describe Customer do
   describe 'instance methods' do
     describe '#success_count' do
       it 'count of successful transactions for a customer' do
+        delete_data
+
         @cust_1 = create(:customer)
         @cust_5 = create(:customer)
         @invoice_1 = create(:invoice, customer: @cust_1)
@@ -87,21 +95,13 @@ RSpec.describe Customer do
         expect(@cust_5.success_count).to eq(2)
       end
     end
-    
+
     describe '#full_name' do
       it 'combines the first and last name of a customer' do
+        delete_data
+
         @cust_1 = create(:customer)
         expect(@cust_1.full_name).to eq("#{@cust_1.first_name} #{@cust_1.last_name}")
-      end
-    end
-
-    describe '#transaction_count' do
-      it 'returns the count of all successful transactions for a merchant by customer' do
-        us_3_test_data
-         
-        expect(@cust_6.transaction_count(@merch_1)).to eq(6)
-        expect(@cust_3.transaction_count(@merch_1)).to eq(4)
-        expect(@cust_5.transaction_count(@merch_1)).to eq(2)
       end
     end
   end

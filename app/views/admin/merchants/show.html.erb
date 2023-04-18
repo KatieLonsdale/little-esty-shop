@@ -1,1 +1,17 @@
-<>
+<h3>Admin Dashboard</h3>
+
+<div id="merchants">
+  <%= link_to 'Merchants', '/admin/merchants', method: :get %>
+</div>
+
+<div id="invoices">
+  <%= link_to 'Invoices', '/admin/invoices', method: :get %>
+</div>
+
+<div>
+  <h4><%= "Antique's by #{@merchant.name}" %></h4></p>
+</div>
+
+<div>
+  <%= link_to "Update Merchant", edit_admin_merchant_path(@merchant) %>
+</div>
