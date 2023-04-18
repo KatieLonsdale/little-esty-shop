@@ -37,5 +37,13 @@ class Merchant < ApplicationRecord
       'Enable'
     end
   end
+
+  def total_revenue(invoice)
+    revenue = 0
+    items_on_invoice(invoice).each do |item|
+      revenue += (item.unit_price * item.quantity)
+    end
+    revenue
+  end
 end
 

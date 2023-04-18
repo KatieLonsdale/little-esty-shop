@@ -63,5 +63,13 @@ RSpec.describe Merchant do
         expect(merchant2.opposite_status).to eq('Disable')
       end
     end
+
+    describe "#total_revenue" do
+      it 'returns the revenue for a given invoice' do
+        us_16_test_data
+        expect(@merch_1.total_revenue(@invoice_1)).to eq(3947)
+        expect(@merch_2.total_revenue(@invoice_1)).to eq(5899)
+      end
+    end
   end
 end
