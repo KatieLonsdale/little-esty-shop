@@ -40,7 +40,7 @@ RSpec.describe Merchant do
     describe "#items_on_invoice" do
       it "returns all items found on given invoice for given merchant" do
         us_16_test_data
-        expected = [@invoice_item_1, @invoice_item_2, @invoice_item_3, @invoice_item_4, @invoice_item_5]
+        expected = [@invoice_item_1, @invoice_item_2]
         results = @merch_1.items_on_invoice(@invoice_1).sort_by{|ii| ii.id}
         expect(results).to eq(expected)
       end
