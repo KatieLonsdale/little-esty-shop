@@ -40,7 +40,8 @@ RSpec.describe '/admin/invoices show page', type: :feature do
 
     it 'displays the total revenue' do
       expect(page).to have_content("Total Revenue: $#{format('%.2f', @invoice1.total_revenue)}")
-      save_and_open_page
+    end
+  end
 
   describe 'User Story 33' do
     before(:all) do
