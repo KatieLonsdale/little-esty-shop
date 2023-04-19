@@ -6,6 +6,7 @@ class Merchants::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    #require 'pry'; binding.pry
+    @item = Item.find(params[:merchant_id])
   end
 end
