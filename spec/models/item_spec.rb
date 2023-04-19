@@ -18,12 +18,23 @@ RSpec.describe Item do
   end
 
   describe 'instance methods' do
-    describe '#opposite_status' do 
-    it 'returns the opposite status' do
+    before(:all) do
       us_9_test_data
-      expect(@item_1.opposite_status).to eq('Enable')
-      expect(@item_2.opposite_status).to eq('Disable')
     end
-  end
+    describe '#opposite_status' do 
+      it 'returns the opposite status' do
+        expect(@item_1.opposite_status).to eq('Enable')
+        expect(@item_2.opposite_status).to eq('Disable')
+      end
+    end
+    describe '#toggle_status' do
+      it 'changes the status of the item' do
+        @item_1.toggle_status
+        @item_2.toggle_status
+
+        expect(@item_1.status).to eq('enabled')
+        expect(@item_2.status).to eq('disabled')
+      end
+    end
   end
 end
