@@ -22,6 +22,15 @@ RSpec.describe 'merchant items show page' do
 
         expect(current_path).to eq("/merchants/#{@merch_2.id}/items/#{@item_2.id}/edit")
       
+        fill_in ('item_description', with 'lovely and useful')
+        fill_in ('item_unit_price', with '175')
+
+        click_on "Update Item"
+
+        expect(current_path).to eq("/merchants/#{@merch_2.id}/items/#{@item_2.id}")
+        expect(page).to have_content('lovely and useful')
+        expect(page).to have_content('175')
+
       end
     end
   end
