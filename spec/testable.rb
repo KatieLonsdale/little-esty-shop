@@ -218,4 +218,42 @@ module Testable
     @item_2 = create(:item, merchant: @merch_1)
     @item_3 = create(:item, merchant: @merch_1)
   end
+
+  def us_12_test_data
+    delete_data
+
+    @merch_1 = create(:merchant)
+    # @merch_2 = create(:merchant)
+
+    # $200
+    @item_5 = create(:item, merchant: @merch_1)
+    # $199.95
+    @item_6 = create(:item, merchant: @merch_1)
+    # $58.99
+    @item_3 = create(:item, merchant: @merch_1)
+    # $34.93
+    @item_4 = create(:item, merchant: @merch_1)
+    # $29
+    @item_2 = create(:item, merchant: @merch_1)
+    # $10.47 - should not appear on top 5
+    @item_1 = create(:item, merchant: @merch_1)
+
+    @invoice_1 = create(:invoice)
+    @invoice_2 = create(:invoice)
+    # only failed transaction
+    @invoice_3 = create(:invoice)
+
+    @transaction = create(:transaction, result: 0, invoice_id: @invoice_3.id)
+    @transaction_2 = create(:transaction, result: 1, invoice_id: @invoice_1.id)
+    @transaction_3 = create(:transaction, result: 1, invoice_id: @invoice_2.id)
+
+    @invoice_item_1 = create(:invoice_item, item: @item_1, invoice: @invoice_1, quantity: 3, unit_price: 349)
+    @invoice_item_2 = create(:invoice_item, item: @item_2, invoice: @invoice_1, quantity: 2, unit_price: 1450)
+    @invoice_item_3 = create(:invoice_item, item: @item_3, invoice: @invoice_1, quantity: 1, unit_price: 5899)
+    @invoice_item_4 = create(:invoice_item, item: @item_4, invoice: @invoice_2, quantity: 7, unit_price: 499)
+    @invoice_item_5 = create(:invoice_item, item: @item_5, invoice: @invoice_2, quantity: 1, unit_price: 20000)
+    @invoice_item_6 = create(:invoice_item, item: @item_6, invoice: @invoice_1, quantity: 5, unit_price: 3999)
+    # failed invoice
+    @invoice_item_7 = create(:invoice_item, item: @item_6, invoice: @invoice_3, quantity: 1, unit_price: 5000)
+  end
 end
