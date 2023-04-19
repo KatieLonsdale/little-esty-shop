@@ -18,7 +18,7 @@ RSpec.describe 'merchant items new page' do
         fill_in('name', with: 'ceramic watering can')
         fill_in('description', with: 'heavy and impractical')
         fill_in('unit_price', with: 49)
-        save_and_open_page
+ 
         click_on("Submit")
       end
 
