@@ -6,6 +6,37 @@ RSpec.describe '/admin/merchants', type: :feature do
     @merch_1 = create(:merchant, status: 0) # enable
     @merch_2 = create(:merchant, status: 1) # disable
     @merch_3 = create(:merchant, status: 1) # disable
+    @merch_4 = create(:merchant, status: 0) # disable
+    @merch_5 = create(:merchant, status: 1) # disable
+    @merch_6 = create(:merchant, status: 0) # disable
+
+    @item_1 = create(:item, merchant: @merch_1)
+    @item_2 = create(:item, merchant: @merch_2)
+    @item_3 = create(:item, merchant: @merch_3)
+    @item_4 = create(:item, merchant: @merch_4)
+    @item_5 = create(:item, merchant: @merch_5)
+    @item_6 = create(:item, merchant: @merch_6)
+
+    @invoice_1 = create(:invoice)
+    @invoice_2 = create(:invoice)
+    @invoice_3 = create(:invoice)
+
+    @invoice_item_1 = create(:invoice_item, invoice: @invoice_1, item: @item_1, quantity: 100, unit_price: 1000)
+    @invoice_item_2 = create(:invoice_item, invoice: @invoice_1, item: @item_2, quantity: 90, unit_price: 1000)
+    @invoice_item_3 = create(:invoice_item, invoice: @invoice_1, item: @item_3, quantity: 40, unit_price: 1000)
+    @invoice_item_4 = create(:invoice_item, invoice: @invoice_2, item: @item_4, quantity: 90, unit_price: 1000)
+    @invoice_item_5 = create(:invoice_item, invoice: @invoice_2, item: @item_5, quantity: 50, unit_price: 1000)
+    @invoice_item_6 = create(:invoice_item, invoice: @invoice_2, item: @item_6, quantity: 90, unit_price: 1000)
+    @invoice_item_7 = create(:invoice_item, invoice: @invoice_3, item: @item_1, quantity: 90, unit_price: 1000)
+    @invoice_item_8 = create(:invoice_item, invoice: @invoice_3, item: @item_2, quantity: 20, unit_price: 1000)
+    @invoice_item_9 = create(:invoice_item, invoice: @invoice_3, item: @item_3, quantity: 10, unit_price: 1000)
+    @invoice_item_10 = create(:invoice_item, invoice: @invoice_3, item: @item_4, quantity: 5, unit_price: 1000)
+    @invoice_item_11 = create(:invoice_item, invoice: @invoice_3, item: @item_5, quantity: 30, unit_price: 1000)
+    @invoice_item_12 = create(:invoice_item, invoice: @invoice_3, item: @item_6, quantity: 70, unit_price: 1000)
+
+    @transaction1 = create(:transaction, invoice: @invoice_1, result: 1)
+    @transaction2 = create(:transaction, invoice: @invoice_2, result: 1)
+    @transaction3 = create(:transaction, invoice: @invoice_3, result: 1)
 
     visit '/admin/merchants'
   end
@@ -90,6 +121,22 @@ RSpec.describe '/admin/merchants', type: :feature do
         expect(page).to have_link('New Merchant')
         click_link 'New Merchant'
         expect(current_path).to eq(new_admin_merchant_path)
+      end
+    end
+
+    describe 'User Story 30' do
+      it ' I see the names of the top 5 merchants by total revenue generated' do
+        expect(page).to have_content("Top Merchants")
+        
+        within("#top-merchants") do
+          expect(page).to have_content("#{@merch_1.name} - $1900.00 in sales")
+          expect(page).to have_content("#{@merch_6.name} - $1600.00 in sales")
+          expect(page).to have_content("#{@merch_2.name} - $1100.00 in sales")
+          expect(page).to have_content("#{@merch_4.name} - $950.00 in sales")
+          expect(page).to have_content("#{@merch_5.name} - $800.00 in sales")
+
+          expect(page).to_not have_content(@merch_3.name)
+        end
       end
     end
   end
