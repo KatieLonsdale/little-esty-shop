@@ -61,7 +61,6 @@ RSpec.describe '/admin/merchants', type: :feature do
         end
 
         expect(current_path).to eq('/admin/merchants')
-        # save_and_open_page
         within("#merchant-#{@merch_2.id}") do
           expect(page).to have_button('Enable')
         end
@@ -83,6 +82,14 @@ RSpec.describe '/admin/merchants', type: :feature do
           expect(page).to_not have_content(@merch_2.name)
           expect(page).to_not have_content(@merch_3.name)
         end
+      end
+    end
+
+    describe 'User Story 29' do
+      it 'I see a link to create a new merchant' do
+        expect(page).to have_link('New Merchant')
+        click_link 'New Merchant'
+        expect(current_path).to eq(new_admin_merchant_path)
       end
     end
   end
