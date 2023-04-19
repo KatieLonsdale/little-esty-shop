@@ -1,0 +1,6 @@
+<% items.each do |item| %>
+   <div id="item-<%= item.id %>">
+   <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"%>
+    <%= button_to "#{item.opposite_status}", "/items/#{item.id}", method: :patch %></li>
+   </div>
+  <% end %> 

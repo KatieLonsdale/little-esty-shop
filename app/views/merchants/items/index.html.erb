@@ -13,11 +13,16 @@
 </div>
 
 <div id="my-items-list">
-  <% @items.each do |item| %>
-   <div id="item-<%= item.id %>">
-   <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}"%>
-    <%= button_to "#{item.opposite_status}", "/items/#{item.id}", method: :patch %></li>
-   </div>
-  <% end %> 
+  <div id="enabled-items">
+    <h3>Enabled Items</h3>
+    <%= render partial: "item_list", locals: { items: @items.enabled } %>
+  </div>
+
+  <div id="disabled-items">
+    <h3>Disabled Items</h3>
+    <%= render partial: "item_list", locals: { items: @items.disabled } %>
+  </div>
 </div>
+
+
   
