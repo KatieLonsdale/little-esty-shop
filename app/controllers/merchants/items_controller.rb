@@ -31,6 +31,6 @@ class Merchants::ItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:description, :unit_price)
+    params.require(:item).permit(:description, :unit_price)
   end
 end
