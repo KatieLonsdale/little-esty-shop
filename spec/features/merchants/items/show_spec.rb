@@ -21,7 +21,6 @@ RSpec.describe 'merchant items show page' do
       end
       
       expect(current_path).to eq("/merchants/#{@merch_2.id}/items/#{@item_2.id}/edit")
-      save_and_open_page
       within("#update-info") do  
         fill_in('item_description', with: 'lovely and useful')
         fill_in('item_unit_price', with: 175)
