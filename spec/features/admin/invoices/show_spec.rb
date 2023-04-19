@@ -19,4 +19,25 @@ RSpec.describe '/admin/invoices show page', type: :feature do
       expect(page).to have_content(@invoice1.customer.full_name)
     end
   end
+
+  describe 'User Story 33' do
+    before(:all) do
+      us_14_test_data
+      visit admin_invoice_path(@invoice_1)
+    end
+
+    it 'displays a table of items and details on the invoice' do
+      expect(page).to have_content('Items on this Invoice:')
+      expect(page).to have_css('table')
+      within 'table' do
+        @invoice_1.invoice_items.each do |ii|
+          expect(page).to have_text(ii.item_name)
+          expect(page).to have_text(ii.quantity)
+          expect(page).to have_text(ii.formatted_unit_price)
+          expect(page).to have_text(ii.status)
+        end
+        expect(page).to_not have_text(@item_4.name)
+      end
+    end
+  end
 end
