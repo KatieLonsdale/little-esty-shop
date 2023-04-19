@@ -45,5 +45,13 @@ class Merchant < ApplicationRecord
     end
     revenue
   end
+
+  def top_five_items
+    items.joins(invoices: :transactions)
+         .where("transactions.result = ?", 1)
+         .group(:id).select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS sales")
+         .order("sales desc")
+         .limit(5)
+  end
 end
 
