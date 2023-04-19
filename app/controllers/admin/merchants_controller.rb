@@ -28,6 +28,10 @@ class Admin::MerchantsController < ApplicationController
     end
   end
 
+  def new
+    
+  end
+
   private 
   def merchant_params
     params.require(:merchant).permit(:name)
