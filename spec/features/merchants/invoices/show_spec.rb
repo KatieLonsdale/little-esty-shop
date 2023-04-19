@@ -1,12 +1,3 @@
-# As a merchant
-# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-# Then I see information related to that invoice including:
-
-# Invoice id
-# Invoice status
-# Invoice created_at date in the format "Monday, July 18, 2019"
-# Customer first and last name
-
 require 'rails_helper'
 require './spec/testable.rb'
 
@@ -96,3 +87,12 @@ RSpec.describe 'merchants invoice show page' do
     end
   end
 end
+
+# I see that each invoice item status is a select field
+# And I see that the invoice item's current status is selected
+# When I click this select field,
+# Then I can select a new status for the Item,
+# And next to the select field I see a button to "Update Item Status"
+# When I click this button
+# I am taken back to the merchant invoice show page
+# And I see that my Item's status has now been updated
