@@ -1,5 +1,9 @@
 <h3>Admin Dashboard</h3>
 
+</div id="new-merch">
+  <%= link_to 'New Merchant', '/admin/merchants/new' %>
+<div>
+
 <div id="merchants">
   <%= link_to 'Merchants', '/admin/merchants', method: :get %>
 </div>
@@ -16,4 +20,3 @@
 <div id="disabled-merchants">
 <h3>Disabled Merchants</h3>
   <%= render partial: "merchant_list", locals: { merchants: @merchants.disabled } %>
-</div>
