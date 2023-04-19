@@ -15,7 +15,7 @@
 
 ## Planning and Organization
 
-We utilizied Miro, Slack and GitHub Project Board to stay organized with our task, goals and obstacles.
+We utilizied [Miro](https://miro.com/app/board/uXjVMUCLQk0=/), Slack and [GitHub Project Board](https://github.com/users/KatieLonsdale/projects/7) to stay organized with our task, goals and obstacles.
 
 We had daily morning stand-ups and worked regularly together via zoom and slack huddle.
 
@@ -35,8 +35,8 @@ There are many things that we would like to refactor given the time.
 
 ## Contributors
 
-- Grace Joh -github
-- Katie Lonsdale -github
-- Boston Lowrey -github
-- Crow Rising -github
+- Grace Joh -[GitHub](https://github.com/grace-joh)
+- Katie Lonsdale -[GitHub](https://github.com/KatieLonsdale)
+- Boston Lowrey -[GitHub](https://github.com/BLowrey24)
+- Crow Rising -[GitHub](https://github.com/CrowRising)
 
