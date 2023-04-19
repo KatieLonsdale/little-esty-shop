@@ -48,5 +48,26 @@ RSpec.describe Invoice do
         expect(invoice_1.created_day_mdy).to eq('Saturday, April 15, 2023')
       end
     end
+
+    describe 'total revenue' do
+      before(:all) do
+        delete_data
+
+        item1 = create(:item)
+        item2 = create(:item)
+        item3 = create(:item)
+
+        @invoice1 = create(:invoice)
+        invoice2 = create(:invoice)
+
+        create(:invoice_item, item: item1, invoice: @invoice1, quantity: 1, unit_price: 935)
+        create(:invoice_item, item: item2, invoice: @invoice1, quantity: 1, unit_price: 1245)
+        create(:invoice_item, item: item3, invoice: invoice2, quantity: 6, unit_price: 30)
+      end
+
+      it 'returns the total revenue on the invoice' do
+        expect(@invoice1.total_revenue).to eq(21.80)
+      end
+    end
   end
 end
