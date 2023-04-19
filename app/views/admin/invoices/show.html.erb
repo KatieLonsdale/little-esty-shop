@@ -17,7 +17,7 @@
     <tr>
       <td><%= ii.item_name %></td>
       <td><%= ii.quantity %></td>
-      <td>$<%= format('%.2f', ii.unit_price) %></td>
+      <td><%= ii.formatted_unit_price %></td>
       <td><%= ii.status %></td>
     </tr>
   <% end %>

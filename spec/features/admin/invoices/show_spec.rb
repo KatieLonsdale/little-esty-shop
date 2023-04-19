@@ -33,7 +33,7 @@ RSpec.describe '/admin/invoices show page', type: :feature do
         @invoice_1.invoice_items.each do |ii|
           expect(page).to have_text(ii.item_name)
           expect(page).to have_text(ii.quantity)
-          expect(page).to have_text("$#{format('%.2f', ii.unit_price)}")
+          expect(page).to have_text(ii.formatted_unit_price)
           expect(page).to have_text(ii.status)
         end
         expect(page).to_not have_text(@item_4.name)
