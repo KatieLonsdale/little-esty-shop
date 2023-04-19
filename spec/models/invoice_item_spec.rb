@@ -36,5 +36,12 @@ RSpec.describe InvoiceItem do
         expect(@invoice_item.invoice_date).to eq("#{current_date}")
       end
     end
+
+    describe '#formatted_unit_price' do
+      it 'converts the unit price from cents to dollar and returns as a string w a dollar sign' do
+        invoice_item = create(:invoice_item, item: @item_1, invoice: @invoice_1, unit_price: 1234)
+        expect(invoice_item.formatted_unit_price).to eq('$12.34')
+      end
+    end
   end
 end
