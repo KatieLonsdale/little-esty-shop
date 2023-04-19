@@ -2,5 +2,6 @@
 
 <p>Status: <%= @invoice.status %></p>
 <p>Created on: <%= @invoice.created_day_mdy %></p>
+<p>Total Revenue: $<%= format('%.2f', @invoice.total_revenue) %></p>
 <h3>Customer:</h3>
 <p><%= @invoice.customer.full_name %></p>
