@@ -87,7 +87,6 @@ RSpec.describe 'merchants invoice show page' do
     end
     it "has a dropdown to change the status for the item" do
       visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
-      save_and_open_page
       within("#item-#{@invoice_item_1.id}") do
         select 'shipped', from: 'status'
         click_button "Update Item Status"
