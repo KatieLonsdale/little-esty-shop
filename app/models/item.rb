@@ -7,4 +7,8 @@ class Item < ApplicationRecord
   def opposite_status
     enabled? ? 'Disable' : 'Enable'
   end
+
+  def toggle_status
+    enabled? ? disabled! : enabled!
+  end
 end
