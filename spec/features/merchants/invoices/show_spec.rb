@@ -1,12 +1,3 @@
-# As a merchant
-# When I visit my merchant's invoice show page(/merchants/merchant_id/invoices/invoice_id)
-# Then I see information related to that invoice including:
-
-# Invoice id
-# Invoice status
-# Invoice created_at date in the format "Monday, July 18, 2019"
-# Customer first and last name
-
 require 'rails_helper'
 require './spec/testable.rb'
 
@@ -92,6 +83,19 @@ RSpec.describe 'merchants invoice show page' do
       visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
       within("#invoice-info") do
         expect(page).to have_content("Total Revenue: $39.47")
+      end
+    end
+    it "has a dropdown to change the status for the item" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      within("#item-#{@invoice_item_1.id}") do
+        select 'shipped', from: 'status'
+        click_button "Update Item Status"
+      end
+      
+      expect(current_path).to eq("/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}")
+      
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content("shipped")
       end
     end
   end

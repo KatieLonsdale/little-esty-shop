@@ -35,7 +35,11 @@
       <%= ii.item.name %>
       <%= ii.quantity %>
       <%= number_to_currency(ii.unit_price.to_f / 100) %>
-      <%= ii.status %>
+
+      <%= form_with url: "/invoice_items/#{ii.id}", method: :patch, local: true do |form|%>
+        <%= form.select :status, ['pending', 'packaged', 'shipped'], selected: ii.status %>
+        <%= form.submit "Update Item Status" %>
+      <% end %>
       <br>
     </div>
   <% end %>
