@@ -123,9 +123,22 @@ RSpec.describe 'merchant items index page' do
       end
     end
   end
-end
 
-# As a merchant,
-# When I visit my merchant items index page
-# Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
-# And I see that each Item is listed in the appropriate section
+  describe 'merchants items index page has link to create new item' do
+    before(:all) do
+      delete_data
+      @merch_1 = create(:merchant)
+      @merch_2 = create(:merchant)
+    end
+    
+    it 'displays link and takes me to form where I can add new item info' do
+        visit "/merchants/#{@merch_2.id}/items"
+        
+        within("#create-new-item") do
+          click_link("New Item")
+        end
+        
+        expect(current_path).to eq("/merchants/#{@merch_2.id}/items/new")
+    end
+  end
+end
