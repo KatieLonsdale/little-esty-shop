@@ -1,0 +1,25 @@
+<h1>Invoice #<%= "#{@invoice.id}" %></h1>
+
+<p>Status: <%= @invoice.status %></p>
+<p>Created on: <%= @invoice.created_day_mdy %></p>
+<p>Total Revenue: $<%= format('%.2f', @invoice.total_revenue) %></p>
+<h3>Customer:</h3>
+<p><%= @invoice.customer.full_name %></p>
+
+<h3>Items on this Invoice:</h3>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.invoice_items.each do |ii| %>
+    <tr>
+      <td><%= ii.item_name %></td>
+      <td><%= ii.quantity %></td>
+      <td><%= ii.formatted_unit_price %></td>
+      <td><%= ii.status %></td>
+    </tr>
+  <% end %>
+ </table>
