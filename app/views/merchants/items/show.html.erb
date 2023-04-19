@@ -2,3 +2,7 @@
 
 <p>Description: <%= @item.description %></p>
 <p>Price: <%= @item.unit_price %></p>
+
+<div id="update-item-info">
+  <%= link_to "Update Item", "/merchants/#{@merchant.id}/items/#{@item.id}/edit" %>
+ </div> 

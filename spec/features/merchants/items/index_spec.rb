@@ -37,11 +37,11 @@ RSpec.describe 'merchant items index page' do
     end
 
     it 'links each item to that items show page' do
-      #require 'pry'; binding.pry
       visit "merchants/#{@merch_1.id}/items"
       list_of_items = @merch_1.items
       
       within("#my-items-list") do
+       
         list_of_items.each do |item|
           
           expect(page).to have_link "#{item.name}", href: "/merchants/#{@merch_1.id}/items/#{item.id}"

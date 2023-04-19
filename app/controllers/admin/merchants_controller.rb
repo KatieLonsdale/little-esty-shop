@@ -14,7 +14,6 @@ class Admin::MerchantsController < ApplicationController
 
   def update
     @merchant = Merchant.find(params[:id])
-
     if params[:merchant]
       if @merchant.update(merchant_params_update)
         flash[:notice] = "Merchant information updated successfully"
