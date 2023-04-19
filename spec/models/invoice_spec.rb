@@ -66,7 +66,7 @@ RSpec.describe Invoice do
       end
 
       it 'returns the total revenue on the invoice' do
-        expect(@invoice1.total_revenue).to eq(2180)
+        expect(@invoice1.total_revenue).to eq(21.80)
       end
     end
   end
