@@ -16,4 +16,14 @@ RSpec.describe Item do
         with_values(disabled: 0, enabled: 1)
     end
   end
+
+  describe 'instance methods' do
+    describe '#opposite_status' do 
+    it 'returns the opposite status' do
+      us_9_test_data
+      expect(@item_1.opposite_status).to eq('Enable')
+      expect(@item_2.opposite_status).to eq('Disable')
+    end
+  end
+  end
 end
