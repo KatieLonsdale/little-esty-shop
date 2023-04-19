@@ -45,5 +45,14 @@ class Merchant < ApplicationRecord
     end
     revenue
   end
+
+  def self.top_five_merch_by_revenue
+    select("merchants.name, merchants.id, SUM(invoice_items.unit_price / 100 * invoice_items.quantity) AS total_rev")
+      .joins(invoices: :transactions)
+      .where(transactions: {result: 1})
+      .group(:id)
+      .order("total_rev DESC")
+      .limit(5)
+  end
 end
 
