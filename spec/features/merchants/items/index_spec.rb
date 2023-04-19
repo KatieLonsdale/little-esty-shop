@@ -42,9 +42,20 @@ RSpec.describe 'merchant items index page' do
       list_of_items = @merch_1.items
       
       within("#my-items-list") do
+        save_and_open_page
         list_of_items.each do |item|
-          #require 'pry'; binding.pry
+          
           expect(page).to have_link "#{item.name}", href: "/merchants/#{@merch_1.id}/items/#{item.id}"
+        end
+      end
+
+      within("#my-items-list") do
+        list_of_items.each do |item|
+          visit "merchants/#{@merch_1.id}/items"
+
+         click_link("#{item.name}")
+
+         expect(current_path).to eq("/merchants/#{@merch_1.id}/items/#{item.id}")
         end
       end
     end
