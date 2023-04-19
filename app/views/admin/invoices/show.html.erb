@@ -4,3 +4,21 @@
 <p>Created on: <%= @invoice.created_day_mdy %></p>
 <h3>Customer:</h3>
 <p><%= @invoice.customer.full_name %></p>
+
+<h3>Items on this Invoice:</h3>
+<table>
+  <tr>
+    <th>Item Name</th>
+    <th>Quantity</th>
+    <th>Unit Price</th>
+    <th>Status</th>
+  </tr>
+  <% @invoice.invoice_items.each do |ii| %>
+    <tr>
+      <td><%= ii.item_name %></td>
+      <td><%= ii.quantity %></td>
+      <td>$<%= format('%.2f', ii.unit_price) %></td>
+      <td><%= ii.status %></td>
+    </tr>
+  <% end %>
+ </table>
