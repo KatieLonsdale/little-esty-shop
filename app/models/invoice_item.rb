@@ -10,4 +10,8 @@ class InvoiceItem < ApplicationRecord
   def invoice_date
     invoice.created_at.strftime("%A, %B %d, %Y")
   end
+
+  def formatted_unit_price
+    "$#{format('%.2f', (unit_price / 100.to_f ))}"
+  end
 end
