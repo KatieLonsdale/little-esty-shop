@@ -9,4 +9,11 @@ RSpec.describe Item do
     it { should have_many(:invoice_items).dependent(:destroy) }
     it { should have_many(:invoices).through(:invoice_items) }
   end
+
+  describe 'enum' do
+    it 'defines status as enum' do
+      should define_enum_for(:status).
+        with_values(disabled: 0, enabled: 1)
+    end
+  end
 end
