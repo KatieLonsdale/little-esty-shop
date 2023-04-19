@@ -85,14 +85,19 @@ RSpec.describe 'merchants invoice show page' do
         expect(page).to have_content("Total Revenue: $39.47")
       end
     end
+    it "has a dropdown to change the status for the item" do
+      visit "/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}"
+      save_and_open_page
+      within("#item-#{@invoice_item_1.id}") do
+        select 'shipped', from: 'status'
+        click_button "Update Item Status"
+      end
+      
+      expect(current_path).to eq("/merchants/#{@merch_1.id}/invoices/#{@invoice_1.id}")
+      
+      within("#item-#{@invoice_item_1.id}") do
+        expect(page).to have_content("shipped")
+      end
+    end
   end
 end
-
-# I see that each invoice item status is a select field
-# And I see that the invoice item's current status is selected
-# When I click this select field,
-# Then I can select a new status for the Item,
-# And next to the select field I see a button to "Update Item Status"
-# When I click this button
-# I am taken back to the merchant invoice show page
-# And I see that my Item's status has now been updated
