@@ -105,5 +105,27 @@ RSpec.describe 'merchant items index page' do
         expect(page).to have_button('Enable')
       end
     end
+    it 'I see two sections for enabled and disabled items' do
+      visit "/merchants/#{@merch_1.id}/items"
+
+      within("#enabled-items") do
+        expect(page).to have_content("Enabled Items")
+        expect(page).to_not have_content(@item_1.name)
+        expect(page).to have_content(@item_2.name)
+        expect(page).to have_content(@item_3.name)
+      end
+
+      within("#disabled-items") do
+        expect(page).to have_content("Disabled Items")
+        expect(page).to have_content(@item_1.name)
+        expect(page).to_not have_content(@item_2.name)
+        expect(page).to_not have_content(@item_3.name)
+      end
+    end
   end
 end
+
+# As a merchant,
+# When I visit my merchant items index page
+# Then I see two sections, one for "Enabled Items" and one for "Disabled Items"
+# And I see that each Item is listed in the appropriate section
