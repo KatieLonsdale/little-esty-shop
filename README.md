@@ -2,41 +2,41 @@
 
 ## Background and Description
 
-"Little Esty Shop" is a group project that requires students to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+"Little Esty Shop" is a group project that required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
 
 ## Learning Goals
+    In addition to the learning goals set before us by the program(see the bulleted list below), we as a group had some of our own learning goals.
+    We wanted to employ advanced routing techniques, learn how to make custom rake commands that we used to import our CVS files, play with CSS styling, improve our sad path testing and edge cases.
+
 - Practice designing a normalized database schema and defining model relationships
 - Utilize advanced routing techniques including namespacing to organize and group like functionality together.
 - Utilize advanced active record techniques to perform complex database queries
 - Practice consuming a public API while utilizing POROs as a way to apply OOP principles to organize code
 
-## Requirements
-- must use Rails 5.2.x
-- must use PostgreSQL
-- all code must be tested via feature tests and model tests, respectively
-- must use GitHub branching, team code reviews via GitHub PR comments, and either GitHub Projects or a project management tool of your group's choice (Trello, Notion, etc.)
-- must include a thorough README to describe the project
-   - README should include a basic description of the project, a summary of the work completed, and some ideas for a potential contributor to work on/refactor next. Also include the names and GitHub links of all student contributors on your project. 
-- must deploy completed code to Heroku
-- Continuous Integration / Continuous Deployment is not allowed
-- Use of scaffolding is not allowed
-- Any gems added to the project must be approved by an instructor
+## Planning and Organization
 
-## Setup
+We utilizied [Miro](https://miro.com/app/board/uXjVMUCLQk0=/), Slack and [GitHub Project Board](https://github.com/users/KatieLonsdale/projects/7) to stay organized with our task, goals and obstacles.
 
-This project requires Ruby 2.7.4.
+We had daily morning stand-ups and worked regularly together via zoom and slack huddle.
 
-* Fork this repository
-* Clone your fork
-* From the command line, install gems and set up your DB:
-    * `bundle`
-    * `rails db:create`
-* Run the test suite with `bundle exec rspec`.
-* Run your development server with `rails s` to see the app in action.
+We had a great balance between driver/navigator and async work.
+All pull requests were filled out via a template which standardized our information/communnication. Pull request notifications were made via slack.
 
-## Phases
+## Retro
 
-1. [Database Setup](./doc/db_setup.md)
-1. [User Stories](./doc/user_stories.md)
-1. [Extensions](./doc/extensions.md)
-1. [Evaluation](./doc/evaluation.md)
+We had a lot of obstacles for this project. Many of which were due to each of ourselves wanting to learn as much as possible and employee as many new tools as we could. This slowed us down and we never really picked the pace back up but it was not for lack of effort. The entore team excelled at communication and being supportive of one another.
+
+There are many things that we would like to refactor given the time.
+- routes
+- factorybot
+- helper methods and partials
+- more sad path testing and edge cases
+- being able to deploy using the API
+
+## Contributors
+
+- Grace Joh -[GitHub](https://github.com/grace-joh)
+- Katie Lonsdale -[GitHub](https://github.com/KatieLonsdale)
+- Boston Lowrey -[GitHub](https://github.com/BLowrey24)
+- Crow Rising -[GitHub](https://github.com/CrowRising)
+

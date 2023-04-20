@@ -4,6 +4,10 @@
   <%= link_to 'My Items', "/merchants/#{@merchant.id}/items" %>
 </div>
 
+<div id="create-new-item">
+  <%= link_to 'New Item', "/merchants/#{@merchant.id}/items/new" %>
+</div>
+
 <div id="my-invoices">
   <%= link_to 'My Invoices', "/merchants/#{@merchant.id}/invoices" %>
 </div>

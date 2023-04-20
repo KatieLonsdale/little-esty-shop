@@ -13,10 +13,20 @@
 </div>
 
 <div id="enabled-merchants">
-<h3>Enabled Merchants</h3>
-<%= render partial: "merchant_list", locals: { merchants: @merchants.enabled } %>
+  <h3>Enabled Merchants</h3>
+  <%= render partial: "merchant_list", locals: { merchants: @merchants.enabled } %>
 </div>
 
 <div id="disabled-merchants">
-<h3>Disabled Merchants</h3>
-  <%= render partial: "merchant_list", locals: { merchants: @merchants.disabled } %>
+  <h3>Disabled Merchants</h3>
+    <%= render partial: "merchant_list", locals: { merchants: @merchants.disabled } %>
+</div>
+
+<div id="top-merchants">
+  <h3>Top Merchants</h3>
+  <ol>
+    <% @top_five.each do |merchant| %>
+      <li><%= merchant.name %> - $<%= format('%.2f', merchant.total_rev) %> in sales </li>
+    <% end %>
+  </ol>
+</div>

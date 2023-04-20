@@ -123,6 +123,7 @@ RSpec.describe 'merchant items index page' do
       end
     end
   end
+
   describe "top 5 popular items" do
     before(:all) do
       us_12_test_data
@@ -156,3 +157,24 @@ RSpec.describe 'merchant items index page' do
     end
   end
 end
+
+
+  describe 'merchants items index page has link to create new item' do
+    before(:all) do
+      delete_data
+      @merch_1 = create(:merchant)
+      @merch_2 = create(:merchant)
+    end
+    
+    it 'displays link and takes me to form where I can add new item info' do
+        visit "/merchants/#{@merch_2.id}/items"
+        
+        within("#create-new-item") do
+          click_link("New Item")
+        end
+        
+        expect(current_path).to eq("/merchants/#{@merch_2.id}/items/new")
+    end
+  end
+end
+

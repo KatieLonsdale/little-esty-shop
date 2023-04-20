@@ -29,8 +29,26 @@ class Merchants::ItemsController < ApplicationController
     end
   end
 
+  def new
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
+  def create
+    @merchant = Merchant.find(params[:merchant_id])
+    if @item = @merchant.items.create(new_item_params)
+      redirect_to "/merchants/#{@merchant.id}/items"
+    else
+      flash[:error] = "Please fill in all required fields"
+      render :new
+    end
+  end
+
   private
   def item_params
     params.require(:item).permit(:description, :unit_price, :name, :merchant_id, :status)
+  end
+
+  def new_item_params
+    params.permit(:name, :description, :unit_item)
   end
 end

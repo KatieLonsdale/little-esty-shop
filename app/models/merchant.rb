@@ -46,12 +46,23 @@ class Merchant < ApplicationRecord
     revenue
   end
 
+
   def top_five_items
     items.joins(invoices: :transactions)
          .where("transactions.result = ?", 1)
          .group(:id).select("items.*, SUM(invoice_items.unit_price * invoice_items.quantity) AS sales")
          .order("sales desc")
          .limit(5)
+  end       
+
+  def self.top_five_merch_by_revenue
+    select("merchants.name, merchants.id, SUM(invoice_items.unit_price / 100 * invoice_items.quantity) AS total_rev")
+      .joins(invoices: :transactions)
+      .where(transactions: {result: 1})
+      .group(:id)
+      .order("total_rev DESC")
+      .limit(5)
+
   end
 end
 
