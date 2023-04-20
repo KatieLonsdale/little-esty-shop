@@ -28,5 +28,16 @@
   </div>
 </div>
 
+<div id="top-items">
+  <h3>Top Items</h3>
+  <ol>
+  <% @merchant.top_five_items.each do |item| %>
+    <% format_sales = number_to_currency(item.sales.to_f / 100) %>
+    <li><%= link_to "#{item.name}", "/merchants/#{@merchant.id}/items/#{item.id}" %>
+    <%= " - #{format_sales} in sales" %></li>
+  <% end %>
+  </ol>
+</div>
+
 
   

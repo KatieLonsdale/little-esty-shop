@@ -65,15 +65,18 @@ RSpec.describe Merchant do
         expect(@merch_1.favorite_customers).to eq([@cust_6, @cust_2, @cust_3, @cust_4, @cust_5])
       end
     end
+
     describe '#items_ready' do
       before(:each) do
         us_4_test_data
       end
+
       it 'returns array of invoice_items that are not shipped ordered by invoice age(oldest to newest)' do
         expected = [@pending_item_1, @pending_item_2, @packaged_item_2, @packaged_item_1].flatten
         expect(@merch_1.items_ready).to eq(expected)
       end
     end
+
     describe '#unique_invoices' do
       it 'returns an array of unique invoices with an item that belong to merchant' do
         us_14_test_data
@@ -90,7 +93,7 @@ RSpec.describe Merchant do
         expect(results).to eq(expected)
       end
     end
-    
+
     describe '#opposite_status' do 
       it 'returns the opposite status' do
         merchant1 = create(:merchant, status: 0)
@@ -106,6 +109,13 @@ RSpec.describe Merchant do
         us_16_test_data
         expect(@merch_1.total_revenue(@invoice_1)).to eq(3947)
         expect(@merch_2.total_revenue(@invoice_1)).to eq(5899)
+      end
+    end
+
+    describe "#top_five_items" do
+      it 'returns the 5 items that have generated the most revenue' do
+        us_12_test_data
+        expect(@merch_1.top_five_items).to eq([@item_5, @item_6, @item_3, @item_4, @item_2])
       end
     end
   end

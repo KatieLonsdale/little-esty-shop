@@ -124,6 +124,41 @@ RSpec.describe 'merchant items index page' do
     end
   end
 
+  describe "top 5 popular items" do
+    before(:all) do
+      us_12_test_data
+    end
+    it "displays the 5 most popular items ranked by revenue" do
+      visit "/merchants/#{@merch_1.id}/items"
+
+      within("#top-items") do
+        expect(page).to have_content("#{@item_5.name} - $200.00 in sales")
+        expect(page).to have_content("#{@item_6.name} - $199.95 in sales")
+        expect(page).to have_content("#{@item_3.name} - $58.99 in sales")
+        expect(page).to have_content("#{@item_4.name} - $34.93 in sales")
+        expect(page).to have_content("#{@item_2.name} - $29.00 in sales")
+        expect(page).to have_no_content(@item_1.name)
+
+        expect(@item_5.name).to appear_before(@item_6.name)
+        expect(@item_6.name).to appear_before(@item_3.name)
+        expect(@item_3.name).to appear_before(@item_4.name)
+        expect(@item_4.name).to appear_before(@item_2.name)
+      end
+    end
+    it "links each item name to its show page" do
+      visit "/merchants/#{@merch_1.id}/items"
+
+      within("#top-items") do
+        expect(page).to have_link("#{@item_5.name}", exact: true)
+        click_link "#{@item_5.name}"
+
+        expect(current_path).to eq("/merchants/#{@merch_1.id}/items/#{@item_5.id}")
+      end
+    end
+  end
+end
+
+
   describe 'merchants items index page has link to create new item' do
     before(:all) do
       delete_data
@@ -142,3 +177,4 @@ RSpec.describe 'merchant items index page' do
     end
   end
 end
+
