@@ -156,7 +156,6 @@ RSpec.describe 'merchant items index page' do
       end
     end
   end
-end
 
 
   describe 'merchants items index page has link to create new item' do
